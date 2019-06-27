@@ -1,0 +1,1 @@
+export const URL_SERVER = "localhost:1337";
