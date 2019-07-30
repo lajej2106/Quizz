@@ -10,23 +10,25 @@ import { appRoutes } from './routes';
 import { AlertsComponent } from './alerts/alerts.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { AlertsService } from './alerts/alerts.service';
-import { WaitForStartComponent } from './wait-for-start/wait-for-start.component';
-import { PlayerService } from './authent/player.service';
+import { PlayerService } from './player/player.service';
 import { AdminComponent } from './admin/admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { ShowResultComponent } from './show-result/show-result.component';
 
-const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
+import { MatTableModule } from '@angular/material/table';
+
+const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: { autoConnect: false } };
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthentComponent,
     AlertsComponent,
-    WaitForStartComponent,
-    AdminComponent
+    AdminComponent,
+    ShowResultComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: 
     AlertModule.forRoot(),
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
+    MatTableModule,
     SocketIoModule.forRoot(configSocketIO)
   ],
   providers: [AlertsService, PlayerService],

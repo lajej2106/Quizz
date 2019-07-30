@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../authent/player.service';
+import { PlayerService } from '../player/player.service';
 import { Socket } from 'ngx-socket-io';
 
 @Component({

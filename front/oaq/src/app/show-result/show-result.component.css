@@ -1,0 +1,12 @@
+.resultBox {
+    margin: 200px auto;
+    width :400px;
+}
+
+table {
+    width: 100%;
+  }
+
+.resultBox h1 {
+    font-size: 1.8em;
+}

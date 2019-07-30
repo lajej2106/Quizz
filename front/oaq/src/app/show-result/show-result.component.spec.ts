@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WaitForStartComponent } from './wait-for-start.component';
+import { ShowResultComponent } from './show-result.component';
 
-describe('WaitForStartComponent', () => {
-  let component: WaitForStartComponent;
-  let fixture: ComponentFixture<WaitForStartComponent>;
+describe('ShowResultComponent', () => {
+  let component: ShowResultComponent;
+  let fixture: ComponentFixture<ShowResultComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WaitForStartComponent ]
+      declarations: [ ShowResultComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WaitForStartComponent);
+    fixture = TestBed.createComponent(ShowResultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

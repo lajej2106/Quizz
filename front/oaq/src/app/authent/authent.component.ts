@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PlayerService } from './player.service';
+import { PlayerService } from '../player/player.service';
 import { AlertsService, ETypeAlert } from '../alerts/alerts.service';
 import { Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
+import { SERVER_EVENTS } from '../constant';
 
 @Component({
   selector: 'app-authent',
@@ -23,37 +24,34 @@ export class AuthentComponent implements OnInit {
 
   ngOnInit() {
 
-    this.socket.on('connected', () => {
-      this.playerService.nomJoueur = this.nomForm.value.nom;
-      sessionStorage.setItem('nomJoueur', this.nomForm.value.nom);
-      this.router.navigateByUrl("/waitForStart");
-    });
-
-    const nomJoueur = sessionStorage.getItem('nomJoueur');
-    if (nomJoueur != null) {
-      this.playerService.nomJoueur = nomJoueur;
-    }
+    this.registerServerEvents();
 
     this.nomForm = new FormGroup({
       'nom': new FormControl('', [
         Validators.required,
-        Validators.minLength(4)
+        Validators.minLength(4),
+        Validators.maxLength(22)
       ])
     });
+
+    if (this.playerService.nomJoueur) {
+      this.router.navigateByUrl("/showResult");
+    }
   }
 
   validerNom() {
     this.playerService.connectPlayer(this.nomForm.value.nom);
+  }
 
-    // this.playerService.savePlayer(this.nomForm.value.nom).subscribe(() => {
-    //   this.playerService.nomJoueur = this.nomForm.value.nom;
-    //   sessionStorage.setItem('nomJoueur', this.nomForm.value.nom);
-    //   this.router.navigateByUrl("/waitForStart");
-    // }, (error) => {
-    //   if (!error.error.msg) {
-    //     error.error = { msg: "Echec de connexion au serveur" };
-    //   }
-    //   this.alertsService.addAlert(ETypeAlert[ETypeAlert.danger], error.error.msg, true, 5000, null);
-    // });
+  private registerServerEvents() {
+    this.socket.on(SERVER_EVENTS.NEW_PLAYER_SUCCESS, () => {
+      this.playerService.nomJoueur = this.nomForm.value.nom;
+      sessionStorage.setItem('nomJoueur', this.nomForm.value.nom);
+      this.router.navigateByUrl("/showResult");
+    });
+
+    this.socket.on(SERVER_EVENTS.NEW_PLAYER_ERROR, (error) => {
+      this.alertsService.addAlert(ETypeAlert[ETypeAlert.danger], error.msg, true, 5000, null);
+    });
   }
 }
