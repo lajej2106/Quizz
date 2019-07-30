@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { PlayerService } from './player/player.service';
+import {Questions} from "./player/player.model";
+import {SERVER_EVENTS} from "./constant";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +11,9 @@ import { PlayerService } from './player/player.service';
 })
 export class AppComponent implements OnInit {
   title = 'oaq';
+
+
+    questions: Questions;
 
   constructor(
     private readonly socket: Socket,

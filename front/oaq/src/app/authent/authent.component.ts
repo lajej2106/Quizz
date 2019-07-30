@@ -5,6 +5,7 @@ import { AlertsService, ETypeAlert } from '../alerts/alerts.service';
 import { Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { SERVER_EVENTS } from '../constant';
+import {Questions} from "../player/player.model";
 
 @Component({
   selector: 'app-authent',
@@ -35,7 +36,11 @@ export class AuthentComponent implements OnInit {
     });
 
     if (this.playerService.nomJoueur) {
-      this.router.navigateByUrl("/showResult");
+      if (this.playerService.nomJoueur == 'score') {
+          this.router.navigateByUrl("/showResult");
+      } else {
+          this.router.navigateByUrl("/questions");
+      }
     }
   }
 

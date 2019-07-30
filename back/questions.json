@@ -1,0 +1,32 @@
+{"questions": {
+  "question": {
+    "titre": "Premiere question",
+    "questionLabel": "Quel est ma couleur favorite ?",
+    "reponses": {
+      "reponse": {"reponseLabel": "Bleu"},
+      "reponse": {"reponseLabel": "Rouge"},
+      "reponse": {"reponseLabel": "Vert"},
+      "reponse": {"reponseLabel": "Jaune"}
+    }
+  },
+  "question": {
+    "titre": "Seconde question",
+    "questionLabel": "Quel est mon artiste favorit ?",
+    "reponses": {
+      "reponse": {"reponseLabel": "SUM41"},
+      "reponse": {"reponseLabel": "BLINK182"},
+      "reponse": {"reponseLabel": "ACDC"},
+      "reponse": {"reponseLabel": "RED HOT"}
+    }
+  },
+  "question": {
+    "titre": "Troisieme question",
+    "questionLabel": "Quel sont mes enfants ?",
+    "reponses": {
+      "reponse": {"reponseLabel": "Lucas"},
+      "reponse": {"reponseLabel": "Nicolas"},
+      "reponse": {"reponseLabel": "Lisa"},
+      "reponse": {"reponseLabel": "Sophie"}
+    }
+  }
+}}

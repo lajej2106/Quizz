@@ -1,3 +1,4 @@
+var questionsJson = require('./questions.json');
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -20,6 +21,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', function(){ console.log(`USER ${getSocketIdentification(socket)} DISCONNECTED`); });
     socket.on('reconnect', function(){ console.log(`USER ${getSocketIdentification(socket)} RECONNECTED`); });
+
     socket.on('newPlayer', (playerName) => {
         if (playerName) {
             if (!players.map(player => player.nom).includes(playerName)) {
@@ -36,6 +38,9 @@ io.on('connection', (socket) => {
         }
     });
 
+    socket.emit('questions', questionsJson);
+    socket.on('broadcastToAll', (msg) => {console.log('Broadcast to all');io.emit('AllPlayers', msg)});
+    socket.on('broadcastQuestionNext', () => {console.log('Question suivante');io.emit('nextQuestions')});
     socket.on('gameStart', () => {io.emit('gameStart')});
     socket.on('getPlayers', (callback) => { 
         console.log('GET PLAYERS');
