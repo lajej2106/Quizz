@@ -1,3 +1,28 @@
-<p>
-  question works!
-</p>
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col align-self-center">
+      <h1>{{question?question.titre:'Titre'}}</h1>
+    </div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col align-self-center">
+      <h3>{{question?question.questionLabel:'Question'}}</h3>
+    </div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col align-self-center">
+      <button class="btn btn-danger btn-lg btn-block" type="submit">{{question?question.reponses[0].reponseLabel:'1/4'}}</button>
+    </div>
+    <div class="col align-self-center">
+      <button class="btn btn-primary btn-lg btn-block" type="submit">{{question?question.reponses[1].reponseLabel:'2/4'}}</button>
+    </div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col align-self-center">
+      <button class="btn btn-warning btn-lg btn-block" type="submit">{{question?question.reponses[2].reponseLabel:'3/4'}}</button>
+    </div>
+    <div class="col align-self-center">
+      <button class="btn btn-success btn-lg btn-block" type="submit">{{question?question.reponses[3].reponseLabel:'4/4'}}</button>
+    </div>
+  </div>
+</div>
