@@ -11,6 +11,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 const players = [{nom: 'toto', score:0}, {nom: 'titi', score:20}, {nom: 'tata', score:10}, {nom: 'tutu', score:9}];
+var indexQuestion = 0;
 
 const buildError = (codeErr, msgErr) => {
     return {code:codeErr, msg: msgErr};
@@ -38,19 +39,32 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.emit('questions', questionsJson);
+    if(!players.map(player => player.nom).includes(getSocketIdentification(socket))) {
+    console.log(`HOHO USER : ${getSocketIdentification(socket)}`);
+    }
+
+    //socket.emit('questions', questionsJson);
     socket.on('broadcastToAll', (msg) => {console.log('Broadcast to all');io.emit('AllPlayers', msg)});
-    socket.on('broadcastQuestionNext', () => {console.log('Question suivante');io.emit('nextQuestions')});
+    socket.on('broadcastQuestionNext', () => {console.log('Question suivante index : ' + indexQuestion.toString());io.emit('nextQuestions', questionsJson.questions[indexQuestion]);indexQuestion++;});
     socket.on('gameStart', () => {io.emit('gameStart')});
-    socket.on('getPlayers', (callback) => { 
+    socket.on('getPlayers', (callback) => {
         console.log('GET PLAYERS');
         callback(players);
+    });
+    socket.on('postReponseQuestion', (reponseQuestion) => {
+        console.log('POST REPONSE QUESTION');
+        console.log(`USER ${getSocketIdentification(socket)}`);
+        if (players.map(player => player.nom).includes(getSocketIdentification(socket))) {
+            console.log(`GOOD USER : ${getSocketIdentification(socket)}`);
+        } else {
+        socket.emit('PlayerIntrouvable', buildError('E003', 'Joueur introuvable'));
+    }
     });
 });
 
 const getSocketIdentification = (socket) => {
     return socket.handshake.query.playerName ? socket.handshake.query.playerName : socket.id;
-} 
+}
 
 const port = 1337;
 server.listen(port, () => {

@@ -10,7 +10,8 @@ export interface IServerEvents {
 
 export interface IClientEvents {
     NEW_PLAYER,
-    GET_PLAYERS
+    GET_PLAYERS,
+    REPONSE_QUESTION
 }
 
 export const SERVER_EVENTS: IServerEvents = {
@@ -23,5 +24,6 @@ export const SERVER_EVENTS: IServerEvents = {
 
 export const CLIENT_EVENTS: IClientEvents = {
     NEW_PLAYER: 'newPlayer',
-    GET_PLAYERS: 'getPlayers'
+    GET_PLAYERS: 'getPlayers',
+    REPONSE_QUESTION: 'postReponseQuestion'
 }
