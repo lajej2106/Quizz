@@ -1,4 +1,5 @@
-{"questions": [{
+{"questions": [{},
+  {
     "titre": "Premiere question",
     "questionLabel": "Quel est ma couleur favorite ?",
     "reponses": [
@@ -6,6 +7,10 @@
       {"reponseLabel": "Rouge"},
       {"reponseLabel": "Vert"},
       {"reponseLabel": "Jaune"}
+    ],
+    "resultats": [
+      {"resultatLabel": "Bleu"},
+      {"resultatLabel": "Rouge"}
     ]
   },
   {
@@ -16,6 +21,9 @@
       {"reponseLabel": "BLINK182"},
       {"reponseLabel": "ACDC"},
       {"reponseLabel": "RED HOT"}
+    ],
+    "resultats": [
+      {"resultatLabel": "BLINK182"}
     ]
   },
   {
@@ -26,6 +34,11 @@
       {"reponseLabel": "Nicolas"},
       {"reponseLabel": "Lisa"},
       {"reponseLabel": "Sophie"}
+    ],
+    "resultats": [
+      {"resultatLabel": "Lisa"},
+      {"resultatLabel": "Nicolas"},
+      {"resultatLabel": "Lucas"}
     ]
   }
 ]}

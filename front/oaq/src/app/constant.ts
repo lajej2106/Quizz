@@ -5,7 +5,8 @@ export interface IServerEvents {
     NEW_PLAYER_ERROR,
     GAME_START,
     QUESTIONS,
-    NEXT_QUESTIONS
+    NEXT_QUESTIONS,
+    COMPTE_A_REBOUR
 }
 
 export interface IClientEvents {
@@ -19,7 +20,8 @@ export const SERVER_EVENTS: IServerEvents = {
     NEW_PLAYER_ERROR: 'newPlayerError',
     GAME_START: 'gameStart',
     QUESTIONS: 'questions',
-    NEXT_QUESTIONS: 'nextQuestions'
+    NEXT_QUESTIONS: 'nextQuestions',
+    COMPTE_A_REBOUR: 'compteARebour'
 }
 
 export const CLIENT_EVENTS: IClientEvents = {

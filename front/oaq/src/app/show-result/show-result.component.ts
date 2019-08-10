@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Player } from '../player/player.model';
+import { Joueurs } from '../player/player.model';
 import { Socket } from 'ngx-socket-io';
 import { CLIENT_EVENTS, SERVER_EVENTS } from '../constant';
 
@@ -11,16 +11,16 @@ import { CLIENT_EVENTS, SERVER_EVENTS } from '../constant';
 export class ShowResultComponent implements OnInit {
 
   displayedColumns: string[];
-  dataSource: Player[];
+  dataSource: Joueurs[];
 
   constructor(private readonly socket: Socket) { }
 
   ngOnInit() {
     this.displayedColumns = ['nom', 'score', 'position'];
 
-    this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (players: Player[]) => {
+    this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (joueur: Joueurs[]) => {
 
-      const sortComparator = (a: Player, b: Player) => {
+      const sortComparator = (a: Joueurs, b: Joueurs) => {
         if (a.score > b.score) {
           return -1
         } else if (a.score === b.score) {
@@ -29,9 +29,9 @@ export class ShowResultComponent implements OnInit {
           return 1
         }
       };
-      players.sort(sortComparator);
+        joueur.sort(sortComparator);
 
-      const playersWithPosition = players.map((player, index) => {
+      const playersWithPosition = joueur.map((player, index) => {
         player.position = index + 1;
         return player;
       });

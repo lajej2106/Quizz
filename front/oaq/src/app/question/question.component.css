@@ -1,3 +1,17 @@
 .row {
     margin-top: 1rem;
 }
+
+
+.block-inactif {
+    border-radius: 30px;
+    padding: 5%;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
+    )
+}
+
+.mat-spinner {
+    margin:0 auto;
+}

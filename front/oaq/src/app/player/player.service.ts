@@ -11,7 +11,7 @@ export class PlayerService {
 
   constructor(private readonly socket: Socket) { }
 
-  connectPlayer(nom: string) {
-    this.socket.emit(CLIENT_EVENTS.NEW_PLAYER, nom);
+  connectPlayer(nom: string, equipe: string) {
+    this.socket.emit(CLIENT_EVENTS.NEW_PLAYER, [nom, equipe]);
   }
 }

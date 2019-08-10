@@ -1,7 +1,8 @@
-export interface Player {
+export interface Joueurs {
     nom: string;
     score: number;
     position: number;
+    equipe: string;
 }
 
 export interface Questions {

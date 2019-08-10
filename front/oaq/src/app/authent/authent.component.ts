@@ -32,27 +32,26 @@ export class AuthentComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(22)
-      ])
+      ]),
+        'equipe': new FormControl('', [
+            Validators.required
+        ])
     });
 
     if (this.playerService.nomJoueur) {
-      if (this.playerService.nomJoueur == 'score') {
-          this.router.navigateByUrl("/showResult");
-      } else {
           this.router.navigateByUrl("/questions");
-      }
     }
   }
 
   validerNom() {
-    this.playerService.connectPlayer(this.nomForm.value.nom);
+    this.playerService.connectPlayer(this.nomForm.value.nom, this.nomForm.value.equipe);
   }
 
   private registerServerEvents() {
     this.socket.on(SERVER_EVENTS.NEW_PLAYER_SUCCESS, () => {
       this.playerService.nomJoueur = this.nomForm.value.nom;
       sessionStorage.setItem('nomJoueur', this.nomForm.value.nom);
-      this.router.navigateByUrl("/showResult");
+        this.router.navigateByUrl("/questions");
     });
 
     this.socket.on(SERVER_EVENTS.NEW_PLAYER_ERROR, (error) => {

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CLIENT_EVENTS, SERVER_EVENTS} from "../constant";
 import {Socket} from "ngx-socket-io";
-import {Question, Questions} from "../player/player.model";
+import {Joueurs, Question, Questions} from "../player/player.model";
+import {$} from "protractor";
 
 @Component({
     selector: 'app-question',
@@ -10,6 +11,10 @@ import {Question, Questions} from "../player/player.model";
 })
 export class QuestionComponent implements OnInit {
 
+    questionActive : boolean = false;
+    compteARebour : number = null;
+    listeJoueursOlivier: Joueurs[];
+    listeJoueursAurore: Joueurs[];
 
     constructor(private readonly socket: Socket) {
     }
@@ -17,20 +22,38 @@ export class QuestionComponent implements OnInit {
     question: Question;
 
     ngOnInit() {
-        /*this.socket.on(SERVER_EVENTS.QUESTIONS, (questionsServeur: any) => {
-            this.questions = questionsServeur.questions;
-            if(this.questions) {
-                this.questionSuivante();
+        this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (joueurs: Joueurs[]) => {
+            console.log('Joueurs : ' + JSON.stringify(joueurs));
+            this.listeJoueursOlivier = [{nom: 'test', equipe: 'Olivier', position: 0, score : 0}];
+            this.listeJoueursAurore = [];
+            for(const i in joueurs){
+                if(joueurs[i].equipe === 'Olivier') {
+                    this.listeJoueursOlivier.push(joueurs[i]);
+                }
+                if(joueurs[i].equipe === 'Aurore') {
+                    this.listeJoueursAurore.push(joueurs[i]);
+                }
             }
-        });*/
+        });
+
         this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {
             this.question = questionServeur
-            console.log("NEXT QUESTIONS : " + JSON.stringify(this.question));
+            this.questionActive = true;
+        });
+
+        console.log("compteur init " );
+        this.socket.on(SERVER_EVENTS.COMPTE_A_REBOUR, (compteur: number) => {
+            console.log("compteur : " + compteur.toString());
+            if (compteur == 0){
+                this.compteARebour = null;
+            } else {
+                this.compteARebour = (compteur/20*100);
+            }
         });
     }
 
     repondre(reponse: number) {
-        console.log("POST REPONSE : " + reponse.toString());
+        this.questionActive = false;
         this.socket.emit(CLIENT_EVENTS.REPONSE_QUESTION, reponse);
     }
 }
