@@ -8,6 +8,7 @@ import { CLIENT_EVENTS } from '../constant';
 export class PlayerService {
 
   nomJoueur: string;
+  equipe: string;
 
   constructor(private readonly socket: Socket) { }
 

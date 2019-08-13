@@ -24,13 +24,8 @@ io.on('connection', (socket) => {
     gestionEvenement(socket);
 
     //socket.emit('questions', questionsJson);
-    socket.on('broadcastToAll', (msg) => {console.log('Broadcast to all');io.emit('AllPlayers', msg)});
-
-    socket.on('gameStart', () => {io.emit('gameStart')});
-    socket.on('getPlayers', (callback) => {
-        console.log('GET PLAYERS');
-        callback(joueurs);
-    });
+    //socket.on('broadcastToAll', (msg) => {console.log('Broadcast to all');io.emit('AllPlayers', msg)});
+    //socket.on('gameStart', () => {io.emit('gameStart')});
 });
 
 

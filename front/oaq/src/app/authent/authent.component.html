@@ -3,11 +3,11 @@
     <h1>Bienvenue</h1>
   </div>
   <div class="d-flex justify-content-center" *ngIf="!playerService.nomJoueur">
-     <form [formGroup]="nomForm" (ngSubmit)="validerNom()">
+     <form [formGroup]="inscriptionForm" (ngSubmit)="validerNom()">
         <div class="form-group">
            <input type="text" class="form-control" placeholder="Entrer votre nom" formControlName="nom"/>
         </div>
-        
+
         <div class="row align-items-center">
            <div class="col align-self-center">
                <p>Je suis dans l'équipe de :</p>
@@ -29,7 +29,7 @@
         </div>
         <div class="row align-items-center">
            <div class="col align-self-center">
-              <button type="submit" class="btn btn-primary btn-lg" [disabled]="!nomForm.valid">Valider</button>
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="!inscriptionForm.valid">Valider</button>
            </div>
         </div>
         </form>

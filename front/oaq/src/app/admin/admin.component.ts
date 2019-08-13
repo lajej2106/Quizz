@@ -9,7 +9,7 @@ import { Socket } from 'ngx-socket-io';
 })
 export class AdminComponent implements OnInit {
 
-  players: any[];
+  joueurs: any[];
   autoRefreshInterval: any;
   isAutoRefresh = false;
 

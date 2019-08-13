@@ -14,7 +14,7 @@ import {Questions} from "../player/player.model";
 })
 export class AuthentComponent implements OnInit {
 
-  nomForm: FormGroup;
+  inscriptionForm: FormGroup;
 
   constructor(
     private readonly playerService: PlayerService,
@@ -27,7 +27,7 @@ export class AuthentComponent implements OnInit {
 
     this.registerServerEvents();
 
-    this.nomForm = new FormGroup({
+    this.inscriptionForm = new FormGroup({
       'nom': new FormControl('', [
         Validators.required,
         Validators.minLength(4),
@@ -44,13 +44,15 @@ export class AuthentComponent implements OnInit {
   }
 
   validerNom() {
-    this.playerService.connectPlayer(this.nomForm.value.nom, this.nomForm.value.equipe);
+    this.playerService.connectPlayer(this.inscriptionForm.value.nom, this.inscriptionForm.value.equipe);
   }
 
   private registerServerEvents() {
     this.socket.on(SERVER_EVENTS.NEW_PLAYER_SUCCESS, () => {
-      this.playerService.nomJoueur = this.nomForm.value.nom;
-      sessionStorage.setItem('nomJoueur', this.nomForm.value.nom);
+      this.playerService.nomJoueur = this.inscriptionForm.value.nom;
+      this.playerService.equipe = this.inscriptionForm.value.equipe;
+      sessionStorage.setItem('nomJoueur', this.inscriptionForm.value.nom);
+      sessionStorage.setItem('equipe', this.inscriptionForm.value.equipe);
         this.router.navigateByUrl("/questions");
     });
 

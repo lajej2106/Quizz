@@ -2,7 +2,6 @@
     margin-top: 1rem;
 }
 
-
 .block-inactif {
     border-radius: 30px;
     padding: 5%;
@@ -15,3 +14,32 @@
 .mat-spinner {
     margin:0 auto;
 }
+
+.liAurore {
+  background-color: hotpink;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.liOlivier{
+  background-color: deepskyblue;
+  margin:0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.cptOlivier {
+  -moz-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
+  -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
+  -o-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
+  -ms-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
+  transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
+  text-align: left;
+}
+
+.cptAurore {
+  font-style: italic;
+  text-align: right;
+}
+

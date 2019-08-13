@@ -3,6 +3,11 @@ module.exports = {
         gestionConnexion(socket);
         connexionNouveauJoueur(socket, io, joueurs);
         recuperationConnexionJoueur(socket, io, joueurs);
+
+        socket.on('getPlayers', (callback) => {
+            console.log('liste des joueurs : ' + JSON.stringify(joueurs));
+            callback(joueurs);
+        });
     }
 };
 
@@ -19,6 +24,10 @@ const gestionConnexion = (socket) => {
 
 const getSocketIdentification = (socket) => {
     return socket.handshake.query.nomJoueur ? socket.handshake.query.nomJoueur : socket.id;
+};
+
+const getSocketEquipe = (socket) => {
+    return socket.handshake.query.equipe ? socket.handshake.query.equipe : null;
 };
 
 const connexionNouveauJoueur = (socket, io, joueurs) => {
@@ -39,15 +48,15 @@ const connexionNouveauJoueur = (socket, io, joueurs) => {
 };
 
 const recuperationConnexionJoueur = (socket, io, joueurs) => {
-    const infoJoueur = getSocketIdentification(socket);
-    console.log('Récupèration : ' + infoJoueur);
-    const Joueur = infoJoueur.split('¤');
-    const nomJoueur = Joueur[0];
-    const equipeJoueur = Joueur[1];
-    if (!joueurs.map(player => player.nom).includes(nomJoueur)) {
-        if (socket.handshake.query.playerName) {
-            console.log(`Récupèration de l'utilisateur ${nomJoueur} - ${equipeJoueur}`);
-            ajoutJoueur(socket, io, joueurs, nomJoueur, equipeJoueur)
+    const nomJoueur = getSocketIdentification(socket);
+    const equipeJoueur = getSocketEquipe(socket);
+    if(nomJoueur && equipeJoueur) {
+        console.log('Récupèration : ' + nomJoueur + ' equipe : ' + equipeJoueur);
+        if (!joueurs.map(joueur => joueur.nom).includes(nomJoueur)) {
+            if (socket.handshake.query.nomJoueur) {
+                console.log(`Récupèration de l'utilisateur ${nomJoueur} - ${equipeJoueur}`);
+                ajoutJoueur(socket, io, joueurs, nomJoueur, equipeJoueur)
+            }
         }
     }
 };
@@ -55,7 +64,8 @@ const recuperationConnexionJoueur = (socket, io, joueurs) => {
 const ajoutJoueur = (socket, io, joueurs, nomJoueur, equipe) => {
     const nouveauJoueur = {nom: nomJoueur, score: 0, equipe: equipe};
     joueurs.push(nouveauJoueur);
-    socket.handshake.query.nomJoueur = nomJoueur + '¤' + equipe;
-    console.log('new Player : ' + JSON.stringify(nouveauJoueur));
+    socket.handshake.query.nomJoueur = nomJoueur;
+    socket.handshake.query.equipe = equipe;
+    console.log('Ajout d\'un joueur : ' + JSON.stringify(nouveauJoueur));
     io.emit('newPlayerSuccess', nouveauJoueur);
 };

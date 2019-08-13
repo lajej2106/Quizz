@@ -5,55 +5,66 @@ import {Joueurs, Question, Questions} from "../player/player.model";
 import {$} from "protractor";
 
 @Component({
-    selector: 'app-question',
-    templateUrl: './question.component.html',
-    styleUrls: ['./question.component.css']
+  selector: 'app-question',
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
 
-    questionActive : boolean = false;
-    compteARebour : number = null;
-    listeJoueursOlivier: Joueurs[];
-    listeJoueursAurore: Joueurs[];
+  questionActive: boolean = false;
+  compteARebour: number = null;
+  displayedColumns: string[];
+  listeJoueursOlivier: Joueurs[];
+  listeJoueursAurore: Joueurs[];
 
-    constructor(private readonly socket: Socket) {
-    }
+  constructor(private readonly socket: Socket) {
+  }
 
-    question: Question;
+  question: Question;
 
-    ngOnInit() {
-        this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (joueurs: Joueurs[]) => {
-            console.log('Joueurs : ' + JSON.stringify(joueurs));
-            this.listeJoueursOlivier = [{nom: 'test', equipe: 'Olivier', position: 0, score : 0}];
-            this.listeJoueursAurore = [];
-            for(const i in joueurs){
-                if(joueurs[i].equipe === 'Olivier') {
-                    this.listeJoueursOlivier.push(joueurs[i]);
-                }
-                if(joueurs[i].equipe === 'Aurore') {
-                    this.listeJoueursAurore.push(joueurs[i]);
-                }
-            }
-        });
+  ngOnInit() {
+    this.displayedColumns = ['nom'];
 
-        this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {
-            this.question = questionServeur
-            this.questionActive = true;
-        });
+    this.getListeJoueurs();
+    this.socket.on(SERVER_EVENTS.NEW_PLAYER_SUCCESS, () => {
+      this.getListeJoueurs();
+    });
 
-        console.log("compteur init " );
-        this.socket.on(SERVER_EVENTS.COMPTE_A_REBOUR, (compteur: number) => {
-            console.log("compteur : " + compteur.toString());
-            if (compteur == 0){
-                this.compteARebour = null;
-            } else {
-                this.compteARebour = (compteur/20*100);
-            }
-        });
-    }
+    this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {
+      this.question = questionServeur;
+      this.questionActive = true;
+    });
 
-    repondre(reponse: number) {
+    console.log("compteur init ");
+    this.socket.on(SERVER_EVENTS.COMPTE_A_REBOUR, (compteur: number) => {
+      console.log("compteur : " + compteur.toString());
+      if (compteur == 0) {
+        this.compteARebour = null;
         this.questionActive = false;
-        this.socket.emit(CLIENT_EVENTS.REPONSE_QUESTION, reponse);
-    }
+      } else {
+        this.compteARebour = (compteur / 20 * 100);
+      }
+    });
+  }
+
+  getListeJoueurs() {
+    this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (joueurs: Joueurs[]) => {
+      console.log('Joueurs : ' + JSON.stringify(joueurs));
+      this.listeJoueursOlivier = [];
+      this.listeJoueursAurore = [];
+      for (const i in joueurs) {
+        if (joueurs[i].equipe === 'Olivier') {
+          this.listeJoueursOlivier.push(joueurs[i]);
+        }
+        if (joueurs[i].equipe === 'Aurore') {
+          this.listeJoueursAurore.push(joueurs[i]);
+        }
+      }
+    });
+  }
+
+  repondre(reponse: number) {
+    this.questionActive = false;
+    this.socket.emit(CLIENT_EVENTS.REPONSE_QUESTION, reponse);
+  }
 }
