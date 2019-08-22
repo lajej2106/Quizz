@@ -20,6 +20,7 @@ import { ShowResultComponent } from './show-result/show-result.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { QuestionComponent } from './question/question.component';
+import { DiapoComponent } from './diapo/diapo.component';
 
 const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: { autoConnect: false } };
 
@@ -30,7 +31,8 @@ const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: 
     AlertsComponent,
     AdminComponent,
     ShowResultComponent,
-    QuestionComponent
+    QuestionComponent,
+    DiapoComponent
   ],
   imports: [
     BrowserModule,
