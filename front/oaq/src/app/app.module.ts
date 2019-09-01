@@ -22,7 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { QuestionComponent } from './question/question.component';
 import { DiapoComponent } from './diapo/diapo.component';
 
-const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: { autoConnect: false } };
+const configSocketIO: SocketIoConfig = { url: 'http://192.168.1.17:1337', options: { autoConnect: false } };
 
 @NgModule({
   declarations: [

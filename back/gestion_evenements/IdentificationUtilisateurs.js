@@ -5,9 +5,10 @@ module.exports = {
         recuperationConnexionJoueur(socket, io, joueurs);
 
         socket.on('getPlayers', (callback) => {
-            console.log('liste des joueurs : ' + JSON.stringify(joueurs));
             callback(joueurs);
         });
+
+        console.log('liste des joueurs : ' + JSON.stringify(joueurs));
     }
 };
 
@@ -32,6 +33,7 @@ const getSocketEquipe = (socket) => {
 
 const connexionNouveauJoueur = (socket, io, joueurs) => {
     socket.on('newPlayer', (infoJoueur) => {
+
         if (infoJoueur) {
             const nomJoueur = infoJoueur[0];
             const equipeJoueur = infoJoueur[1];
@@ -67,5 +69,9 @@ const ajoutJoueur = (socket, io, joueurs, nomJoueur, equipe) => {
     socket.handshake.query.nomJoueur = nomJoueur;
     socket.handshake.query.equipe = equipe;
     console.log('Ajout d\'un joueur : ' + JSON.stringify(nouveauJoueur));
-    io.emit('newPlayerSuccess', nouveauJoueur);
+    socket.emit('newPlayerSuccess', nouveauJoueur);
+};
+
+const buildError = (codeErr, msgErr) => {
+    return {code:codeErr, msg: msgErr};
 };

@@ -17,7 +17,7 @@ export class AuthentComponent implements OnInit {
   inscriptionForm: FormGroup;
 
   constructor(
-    private readonly playerService: PlayerService,
+    public playerService: PlayerService,
     private readonly alertsService: AlertsService,
     private readonly router: Router,
     private readonly socket: Socket) {
@@ -37,10 +37,6 @@ export class AuthentComponent implements OnInit {
             Validators.required
         ])
     });
-
-    if (this.playerService.nomJoueur) {
-          this.router.navigateByUrl("/questions");
-    }
   }
 
   validerNom() {
@@ -49,11 +45,11 @@ export class AuthentComponent implements OnInit {
 
   private registerServerEvents() {
     this.socket.on(SERVER_EVENTS.NEW_PLAYER_SUCCESS, () => {
-      this.playerService.nomJoueur = this.inscriptionForm.value.nom;
-      this.playerService.equipe = this.inscriptionForm.value.equipe;
+      this.playerService.setNomJoueur(this.inscriptionForm.value.nom);
+      this.playerService.setEquipe(this.inscriptionForm.value.equipe);
       sessionStorage.setItem('nomJoueur', this.inscriptionForm.value.nom);
       sessionStorage.setItem('equipe', this.inscriptionForm.value.equipe);
-        this.router.navigateByUrl("/questions");
+      this.router.navigateByUrl("/questions");
     });
 
     this.socket.on(SERVER_EVENTS.NEW_PLAYER_ERROR, (error) => {

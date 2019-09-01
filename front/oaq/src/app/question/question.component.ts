@@ -37,7 +37,6 @@ export class QuestionComponent implements OnInit {
 
     console.log("compteur init ");
     this.socket.on(SERVER_EVENTS.COMPTE_A_REBOUR, (compteur: number) => {
-      console.log("compteur : " + compteur.toString());
       if (compteur == 0) {
         this.compteARebour = null;
         this.questionActive = false;

@@ -1,4 +1,4 @@
-export const URL_SERVER = "localhost:1337";
+export const URL_SERVER = "192.168.1.17:1337";
 
 export interface IServerEvents {
     NEW_PLAYER_SUCCESS,
@@ -6,7 +6,8 @@ export interface IServerEvents {
     GAME_START,
     QUESTIONS,
     NEXT_QUESTIONS,
-    COMPTE_A_REBOUR
+    COMPTE_A_REBOUR,
+    JOUEUR_REPONDU
 }
 
 export interface IClientEvents {
@@ -21,11 +22,12 @@ export const SERVER_EVENTS: IServerEvents = {
     GAME_START: 'gameStart',
     QUESTIONS: 'questions',
     NEXT_QUESTIONS: 'nextQuestions',
-    COMPTE_A_REBOUR: 'compteARebour'
-}
+    COMPTE_A_REBOUR: 'compteARebour',
+    JOUEUR_REPONDU: 'joueurRepondu'
+};
 
 export const CLIENT_EVENTS: IClientEvents = {
     NEW_PLAYER: 'newPlayer',
     GET_PLAYERS: 'getPlayers',
     REPONSE_QUESTION: 'postReponseQuestion'
-}
+};

@@ -14,9 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 const joueurs = [];
 
 
-const buildError = (codeErr, msgErr) => {
-    return {code:codeErr, msg: msgErr};
-};
 
 
 io.on('connection', (socket) => {

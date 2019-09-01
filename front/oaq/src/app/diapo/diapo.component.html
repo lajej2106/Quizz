@@ -1,45 +1,30 @@
-<div class="container">
-  <div class="row">
-    Titre
+<div class="container-fluid">
+  <div class="row align-items-center">
+    <div class="col align-self-center">
+      <h1>{{question?question.titre:'Titre'}}</h1>
+    </div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col align-self-center">
+      <h3>{{question?question.questionLabel:'Question'}}</h3>
+    </div>
   </div>
   <div class="row ">
-    <div class="col-2 align-self-center">
-
-      <div class="cptContainer">
-        <div class="cptNums cptNums-ten">
-          <div class="cptNum" data-num="9" data-num-next="8"></div>
-          <div class="cptNum" data-num="8" data-num-next="7"></div>
-          <div class="cptNum" data-num="7" data-num-next="6"></div>
-          <div class="cptNum" data-num="6" data-num-next="5"></div>
-          <div class="cptNum" data-num="5" data-num-next="4"></div>
-          <div class="cptNum" data-num="3" data-num-next="6"></div>
-          <div class="cptNum" data-num="6" data-num-next="7"></div>
-          <div class="cptNum" data-num="7" data-num-next="8"></div>
-          <div class="cptNum" data-num="8" data-num-next="9"></div>
-          <div class="cptNum" data-num="9" data-num-next="0"></div>
-        </div>
-        <div class="cptNums cptNums-one">
-          <div class="cptNum" data-num="0" data-num-next="1"></div>
-          <div class="cptNum" data-num="1" data-num-next="2"></div>
-          <div class="cptNum" data-num="2" data-num-next="3"></div>
-          <div class="cptNum" data-num="3" data-num-next="4"></div>
-          <div class="cptNum" data-num="4" data-num-next="5"></div>
-          <div class="cptNum" data-num="5" data-num-next="6"></div>
-          <div class="cptNum" data-num="6" data-num-next="7"></div>
-          <div class="cptNum" data-num="7" data-num-next="8"></div>
-          <div class="cptNum" data-num="8" data-num-next="9"></div>
-          <div class="cptNum" data-num="9" data-num-next="0"></div>
-        </div>
-      </div>
-
+    <div class="col-3 align-self-center text-center">
+      TimeOut: {{compteARebour}}
     </div>
 
-    <div class="col-8 align-self-center">
-      <div class="image" style="background-image:url(assets/photos/photo_mariage_1.png)"></div>
+    <div class="col-6 align-self-center text-center">
+      <img class="image" src="{{image}}">
     </div>
 
-    <div class="col-2 align-self-center">
-      Nb réponse
+    <div class="col-3 align-self-center text-center">
+      Podium:
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let joueurRepondu of listeJoueursRepondu|slice:0:5; let i = index">
+            <b>{{joueurRepondu.nom}}</b>
+          </li>
+      </ul>
     </div>
   </div>
 

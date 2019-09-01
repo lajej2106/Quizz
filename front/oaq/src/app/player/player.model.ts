@@ -13,6 +13,7 @@ export  interface Question {
     titre: string;
     questionLabel: string;
     reponses: Reponses;
+    image: string;
 }
 
 export interface Reponses {

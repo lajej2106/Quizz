@@ -2,13 +2,13 @@
     margin-top: 1rem;
 }
 
+.container{
+  margin-top: 1rem;
+}
+
 .block-inactif {
-    border-radius: 30px;
-    padding: 5%;
-    background: linear-gradient(
-            rgba(0, 0, 0, 0.45),
-            rgba(0, 0, 0, 0.45)
-    )
+  background-size: cover;
+  background-blend-mode: saturation;
 }
 
 .mat-spinner {
@@ -30,11 +30,11 @@
 }
 
 .cptOlivier {
-  -moz-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
-  -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
-  -o-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
-  -ms-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
-  transform: scale(1) rotate(0deg) translate(0px, 0px) skew(10deg, 0deg);
+  -moz-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(8deg, 0deg);
+  -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(8deg, 0deg);
+  -o-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(8deg, 0deg);
+  -ms-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(8deg, 0deg);
+  transform: scale(1) rotate(0deg) translate(0px, 0px) skew(8deg, 0deg);
   text-align: left;
 }
 

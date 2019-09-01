@@ -8,7 +8,7 @@ import { AlertsService } from './alerts.service';
 })
 export class AlertsComponent implements OnInit {
 
-  constructor(private readonly alertsServices: AlertsService) { }
+  constructor(public alertsServices: AlertsService) { }
 
   ngOnInit() {
   }

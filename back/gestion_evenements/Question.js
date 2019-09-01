@@ -7,7 +7,7 @@ let compteur =
         Question: function (app, socket, io, joueurs) {
 
             envoyerQuestion(socket, io);
-            reponseQuestion(socket, joueurs);
+            reponseQuestion(socket, io, joueurs);
 
 
         }
@@ -22,7 +22,7 @@ const envoyerQuestion = (socket, io) => {
     });
 };
 
-const reponseQuestion = (socket, joueurs) => {
+const reponseQuestion = (socket, io, joueurs) => {
     socket.on('postReponseQuestion', (reponseQuestion) => {
         const nomJoueur = socket.handshake.query.nomJoueur;
         console.log('Score : ' + nomJoueur);
@@ -36,8 +36,9 @@ const reponseQuestion = (socket, joueurs) => {
                             if (compteur != 0) {
                                 joueur.score = joueur.score + 9 * compteur
                             } else {
-                                joueur.score = joueur.score + 4;
+                                joueur.score = joueur.score + 5;
                             }
+                            io.emit('joueurRepondu', joueur);
                         }
                     }
                 }

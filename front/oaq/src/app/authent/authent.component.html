@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="d-flex justify-content-center" *ngIf="!playerService.nomJoueur">
+  <div class="d-flex justify-content-center" *ngIf="!playerService.getNomJoueur()">
     <h1>Bienvenue</h1>
   </div>
-  <div class="d-flex justify-content-center" *ngIf="!playerService.nomJoueur">
+  <div class="d-flex justify-content-center" *ngIf="!playerService.getNomJoueur()">
      <form [formGroup]="inscriptionForm" (ngSubmit)="validerNom()">
         <div class="form-group">
            <input type="text" class="form-control" placeholder="Entrer votre nom" formControlName="nom"/>
@@ -34,7 +34,7 @@
         </div>
         </form>
     </div>
-<div class="d-flex justify-content-center" *ngIf="playerService.nomJoueur">
-  <p>Vous êtes déjà inscrit {{playerService.nomJoueur}}</p>
+<div class="d-flex justify-content-center" *ngIf="playerService.getNomJoueur()">
+  <p>Vous êtes déjà inscrit {{playerService.getNomJoueur()}}</p>
 </div>
 </div>

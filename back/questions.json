@@ -2,6 +2,7 @@
   {
     "titre": "Premiere question",
     "questionLabel": "Quel est ma couleur favorite ?",
+    "image": "Question1.png",
     "reponses": [
       {"reponseLabel": "Bleu"},
       {"reponseLabel": "Rouge"},
@@ -16,6 +17,7 @@
   {
     "titre": "Seconde question",
     "questionLabel": "Quel est mon artiste favorit ?",
+    "image": "Question1.png",
     "reponses": [
       {"reponseLabel": "SUM41"},
       {"reponseLabel": "BLINK182"},
@@ -29,6 +31,7 @@
   {
     "titre": "Troisieme question",
     "questionLabel": "Quel sont mes enfants ?",
+    "image": "Question1.png",
     "reponses": [
       {"reponseLabel": "Lucas"},
       {"reponseLabel": "Nicolas"},
