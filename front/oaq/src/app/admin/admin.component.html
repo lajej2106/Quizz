@@ -1,9 +1,12 @@
 <div class="container">
-    <div class="container-fluid">
-        <button class="btn btn-primary" (click)="broadcast()">broadcast</button>
+  <div class="row">
+    <div class="col">
+      <p>Démarage du jeu</p>
+      <button class="btn btn-primary" (click)="questionNext()">LetsGo</button>
     </div>
-    <br>
-    <div class="container-fluid">
-        <button class="btn btn-primary" (click)="questionNext()">question suivante</button>
+    <div class="col">
+      <p>Question suivante</p>
+      <button class="btn btn-primary" (click)="questionNext()">Next</button>
     </div>
+  </div>
 </div>

@@ -12,7 +12,7 @@ import {SERVER_EVENTS} from "./constant";
 export class AppComponent implements OnInit {
   title = 'oaq';
 
-
+    letsGo: boolean = false;
     questions: Questions;
 
   constructor(
@@ -26,8 +26,9 @@ export class AppComponent implements OnInit {
     if (nomJoueur != null) {
       this.playerService.nomJoueur = nomJoueur;
       this.playerService.equipe = equipe;
-      this.socket.ioSocket.io.opts.query = { nomJoueur: nomJoueur, equipe: equipe };
+      this.socket.ioSocket.io.opts.query = {nomJoueur: nomJoueur, equipe: equipe};
     }
     this.socket.connect();
+
   }
 }

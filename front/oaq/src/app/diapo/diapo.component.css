@@ -5,6 +5,23 @@
   border-radius:2em;
 }
 
+#fondecran {
+  /* Fixe l'image en haut à gauche de la page */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+#pageentree {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 9999;
+}
+
 .row {
   margin-top: 1rem;
 }

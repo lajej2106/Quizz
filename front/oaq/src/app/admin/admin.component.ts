@@ -21,13 +21,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  broadcast() {
-    console.log('click on broadcast');
-    this.socket.emit('broadcastToAll', 'mon super message');
-  }
-
     questionNext() {
-        console.log('click on question Next');
         this.socket.emit('broadcastQuestionNext');
     }
 }

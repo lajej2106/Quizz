@@ -12,6 +12,7 @@ export class DiapoComponent implements OnInit {
 
   constructor(private readonly socket: Socket) { }
 
+  letsGo: boolean = false;
   question: Question;
   compteARebour: number;
   compteARebourNumsTen: string = '0';
@@ -20,6 +21,11 @@ export class DiapoComponent implements OnInit {
   image: string = 'assets/images/PleaseWait.png';
 
   ngOnInit() {
+
+    this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (compteur: number) => {
+      this.letsGo = true;
+    });
+
     this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {
       this.question = questionServeur;
       this.image = 'assets/images/' + this.question.image;

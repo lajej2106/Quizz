@@ -8,8 +8,6 @@ let compteur =
 
             envoyerQuestion(socket, io);
             reponseQuestion(socket, io, joueurs);
-
-
         }
     };
 
