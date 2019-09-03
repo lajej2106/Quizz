@@ -9,15 +9,16 @@ export interface Questions {
     question: Question[];
 }
 
+export interface Resultat {
+  resultatLabel: string;
+}
+
 export  interface Question {
     titre: string;
     questionLabel: string;
-    reponses: Reponses;
+    reponses: Reponse[];
+    resultats: Resultat[];
     image: string;
-}
-
-export interface Reponses {
-    reponse: Reponse[];
 }
 
 export interface Reponse {

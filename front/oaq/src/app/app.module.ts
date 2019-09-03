@@ -21,6 +21,8 @@ import { ShowResultComponent } from './show-result/show-result.component';
 import { MatTableModule } from '@angular/material/table';
 import { QuestionComponent } from './question/question.component';
 import { DiapoComponent } from './diapo/diapo.component';
+import { ModalComponent } from './question/modal/modal.component';
+import {MatDialogModule} from "@angular/material";
 
 const configSocketIO: SocketIoConfig = { url: 'http://192.168.1.17:1337', options: { autoConnect: false } };
 
@@ -32,7 +34,8 @@ const configSocketIO: SocketIoConfig = { url: 'http://192.168.1.17:1337', option
     AdminComponent,
     ShowResultComponent,
     QuestionComponent,
-    DiapoComponent
+    DiapoComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +47,11 @@ const configSocketIO: SocketIoConfig = { url: 'http://192.168.1.17:1337', option
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    SocketIoModule.forRoot(configSocketIO)
+    SocketIoModule.forRoot(configSocketIO),
+    MatDialogModule
   ],
   providers: [AlertsService, PlayerService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalComponent]
 })
 export class AppModule { }

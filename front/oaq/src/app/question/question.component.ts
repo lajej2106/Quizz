@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {CLIENT_EVENTS, SERVER_EVENTS} from "../constant";
 import {Socket} from "ngx-socket-io";
-import {Joueurs, Question, Questions} from "../player/player.model";
+import {Joueurs, Question} from "../player/player.model";
 import {$} from "protractor";
+import {MatDialog, MatDialogRef} from "@angular/material";
+import {ModalComponent} from "./modal/modal.component";
+import {forEach} from "@angular/router/src/utils/collection";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-question',
@@ -13,16 +17,25 @@ export class QuestionComponent implements OnInit {
 
   questionActive: boolean = false;
   compteARebour: number = null;
-  displayedColumns: string[];
+  displayedColumns: string[]
   listeJoueursOlivier: Joueurs[];
   listeJoueursAurore: Joueurs[];
+  reponse: any;
+  cssbtn1: string;
+  cssbtn2: string;
+  cssbtn3: string;
+  cssbtn4: string;
 
-  constructor(private readonly socket: Socket) {
+  constructor(private readonly socket: Socket,
+              public modal: MatDialog) {
   }
 
+
   question: Question;
+  modalSpinner: MatDialogRef<ModalComponent, any>;
 
   ngOnInit() {
+    this.openModal();
     this.displayedColumns = ['nom'];
 
     this.getListeJoueurs();
@@ -31,6 +44,7 @@ export class QuestionComponent implements OnInit {
     });
 
     this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {
+      this.closeModal();
       this.question = questionServeur;
       this.questionActive = true;
     });
@@ -38,8 +52,10 @@ export class QuestionComponent implements OnInit {
     console.log("compteur init ");
     this.socket.on(SERVER_EVENTS.COMPTE_A_REBOUR, (compteur: number) => {
       if (compteur == 0) {
+        this.bonneReponse();
         this.compteARebour = null;
         this.questionActive = false;
+        this.closeModal();
       } else {
         this.compteARebour = (compteur / 20 * 100);
       }
@@ -62,8 +78,80 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  repondre(reponse: number) {
+  repondre(reponse: any) {
+    this.reponse = reponse;
+    this.openModal();
     this.questionActive = false;
     this.socket.emit(CLIENT_EVENTS.REPONSE_QUESTION, reponse);
+    this.reponseSelection(reponse);
+  }
+
+
+  openModal(): void {
+    this.modalSpinner = this.modal.open(ModalComponent, {
+      /*width: '100%',*/
+      position: {top: '0px'}, disableClose: true
+    });
+  }
+
+  closeModal(): void {
+    if (this.modalSpinner) {
+      this.modalSpinner.close();
+    }
+  }
+
+  private bonneReponse() {
+    for (let resultat of this.question.resultats) {
+      if (resultat.resultatLabel === this.question.reponses[0].reponseLabel) {
+        if (resultat.resultatLabel === this.reponse) {
+          this.cssbtn1 = 'btn-outline-success';
+        } else {
+          this.cssbtn1 = 'btn-outline-primary';
+        }
+      }
+      if (resultat.resultatLabel === this.question.reponses[1].reponseLabel) {
+        if (resultat.resultatLabel === this.reponse) {
+          this.cssbtn2 = 'btn-outline-success';
+        } else {
+          this.cssbtn2 = 'btn-outline-primary';
+        }
+      }
+      if (resultat.resultatLabel === this.question.reponses[2].reponseLabel) {
+        if (resultat.resultatLabel === this.reponse) {
+          this.cssbtn3 = 'btn-outline-success';
+        } else {
+          this.cssbtn3 = 'btn-outline-primary';
+        }
+      }
+      if (resultat.resultatLabel === this.question.reponses[3].reponseLabel) {
+        if (resultat.resultatLabel === this.reponse) {
+          this.cssbtn4 = 'btn-outline-success';
+        } else {
+          this.cssbtn4 = 'btn-outline-primary';
+        }
+      }
+    }
+  }
+
+  reponseSelection(reponse: any) {
+    this.cssbtn1 = null;
+    this.cssbtn2 = null;
+    this.cssbtn3 = null;
+    this.cssbtn4 = null;
+
+    if (reponse === this.question.reponses[0].reponseLabel) {
+      this.cssbtn1 = 'btn-danger';
+    }
+    if (reponse === this.question.reponses[1].reponseLabel) {
+      this.cssbtn2 = 'btn-primary';
+    }
+    if (reponse === this.question.reponses[2].reponseLabel) {
+      this.cssbtn3 = 'btn-warning';
+    }
+    if (reponse === this.question.reponses[3].reponseLabel) {
+      this.cssbtn4 = 'btn-success';
+    }
   }
 }
+
+
