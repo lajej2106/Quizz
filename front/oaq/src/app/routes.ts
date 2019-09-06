@@ -8,6 +8,7 @@ import {DiapoComponent} from "./diapo/diapo.component";
 export const appRoutes: Routes = [
     { path: 'authent', component: AuthentComponent },
     { path: '', redirectTo: 'authent', pathMatch: 'full' },
+    { path: 'authent', redirectTo: 'authent', pathMatch: 'full' },
     { path: 'showResult', component: ShowResultComponent },
     { path: 'questions', component: QuestionComponent},
     { path: 'admin', component: AdminComponent },

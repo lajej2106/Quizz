@@ -7,6 +7,7 @@ import {MatDialog, MatDialogRef} from "@angular/material";
 import {ModalComponent} from "./modal/modal.component";
 import {forEach} from "@angular/router/src/utils/collection";
 import {of} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-question',
@@ -27,6 +28,7 @@ export class QuestionComponent implements OnInit {
   cssbtn4: string;
 
   constructor(private readonly socket: Socket,
+              private readonly router: Router,
               public modal: MatDialog) {
   }
 
@@ -39,8 +41,9 @@ export class QuestionComponent implements OnInit {
     this.displayedColumns = ['nom'];
 
     this.getListeJoueurs();
-    this.socket.on(SERVER_EVENTS.NEW_PLAYER_SUCCESS, () => {
+    this.socket.on(SERVER_EVENTS.BROADCAST_NOUVEAU_JOUEUR, () => {
       this.getListeJoueurs();
+      this.router.navigateByUrl("/questions");
     });
 
     this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {

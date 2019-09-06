@@ -36,5 +36,6 @@
     </div>
 <div class="d-flex justify-content-center" *ngIf="playerService.getNomJoueur()">
   <p>Vous êtes déjà inscrit {{playerService.getNomJoueur()}}</p>
+  <button class="btn btn-primary" (click)="allezAuQuestionnaire()">Connexion</button>
 </div>
 </div>

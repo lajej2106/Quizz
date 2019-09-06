@@ -70,6 +70,7 @@ const ajoutJoueur = (socket, io, joueurs, nomJoueur, equipe) => {
     socket.handshake.query.equipe = equipe;
     console.log('Ajout d\'un joueur : ' + JSON.stringify(nouveauJoueur));
     socket.emit('newPlayerSuccess', nouveauJoueur);
+    io.emit('broadcastNewPlayer', nouveauJoueur);
 };
 
 const buildError = (codeErr, msgErr) => {

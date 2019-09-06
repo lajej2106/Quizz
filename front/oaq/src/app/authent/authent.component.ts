@@ -43,13 +43,19 @@ export class AuthentComponent implements OnInit {
     this.playerService.connectPlayer(this.inscriptionForm.value.nom, this.inscriptionForm.value.equipe);
   }
 
+  allezAuQuestionnaire() {
+    if(this.playerService.getNomJoueur()){
+      this.router.navigateByUrl("/questions");
+    }
+  }
+
   private registerServerEvents() {
     this.socket.on(SERVER_EVENTS.NEW_PLAYER_SUCCESS, () => {
       this.playerService.setNomJoueur(this.inscriptionForm.value.nom);
       this.playerService.setEquipe(this.inscriptionForm.value.equipe);
       sessionStorage.setItem('nomJoueur', this.inscriptionForm.value.nom);
       sessionStorage.setItem('equipe', this.inscriptionForm.value.equipe);
-      this.router.navigateByUrl("/questions");
+      this.allezAuQuestionnaire();
     });
 
     this.socket.on(SERVER_EVENTS.NEW_PLAYER_ERROR, (error) => {

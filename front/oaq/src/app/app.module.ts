@@ -24,7 +24,7 @@ import { DiapoComponent } from './diapo/diapo.component';
 import { ModalComponent } from './question/modal/modal.component';
 import {MatDialogModule} from "@angular/material";
 
-const configSocketIO: SocketIoConfig = { url: 'http://192.168.1.17:1337', options: { autoConnect: false } };
+const configSocketIO: SocketIoConfig = { url: 'http://192.168.8.100:1337', options: { autoConnect: false } };
 
 @NgModule({
   declarations: [

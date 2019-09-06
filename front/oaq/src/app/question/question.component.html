@@ -57,14 +57,14 @@
           <div class="row align-items-center">
             <div class="col align-self-center margin0">
               <ul class="list-group">
-                <li class="list-group-item liOlivier" *ngFor="let joueurOlivier of listeJoueursOlivier; let i = index">
+                <li class="list-group-item liOlivier" *ngFor="let joueurOlivier of listeJoueursOlivier.slice().reverse(); let i = index">
                   <b>{{joueurOlivier.nom}}</b>
                 </li>
               </ul>
             </div>
             <div class="col align-self-center margin0">
               <ul class="list-group">
-                <li class="list-group-item liAurore" *ngFor="let joueurAurore of listeJoueursAurore; let y = index">
+                <li class="list-group-item liAurore" *ngFor="let joueurAurore of listeJoueursAurore.slice().reverse(); let y = index">
                   <b>{{joueurAurore.nom}}</b>
                 </li>
               </ul>
