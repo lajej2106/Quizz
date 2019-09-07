@@ -13,13 +13,13 @@ let compteur =
 
 const envoyerQuestion = (socket, io) => {
     socket.on('broadcastQuestionNext', () => {
-        io.emit('navigueVersDiapo');
+        indexQuestion++;
         if(indexQuestion >= questionsJson.questions.length) {
             console.log('!!!!!!!!! Fin du JEU !!!!!!!!!!');
             io.emit('showResults');
             io.emit('endGames');
         } else {
-            indexQuestion++;
+            io.emit('navigueVersDiapo');
             console.log(`Question suivante index : ${indexQuestion.toString()}`);
             io.emit('nextQuestions', questionsJson.questions[indexQuestion]);
             compteARebour(socket, io);

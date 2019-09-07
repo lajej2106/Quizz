@@ -26,7 +26,7 @@ export class ShowResultComponent implements OnInit {
       this.router.navigateByUrl("/diapo");
     });
 
-    this.socket.emit(SERVER_EVENTS.END_GAMES, () => {
+    this.socket.on(SERVER_EVENTS.END_GAMES, () => {
       this.finDuJeux = true;
     });
 
