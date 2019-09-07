@@ -31,7 +31,7 @@ export class AuthentComponent implements OnInit {
       'nom': new FormControl('', [
         Validators.required,
         Validators.minLength(4),
-        Validators.maxLength(22)
+        Validators.maxLength(20)
       ]),
         'equipe': new FormControl('', [
             Validators.required

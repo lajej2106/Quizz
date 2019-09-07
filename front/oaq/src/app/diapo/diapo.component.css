@@ -5,6 +5,22 @@
   border-radius:2em;
 }
 
+.logo {
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+}
+
+.liAurore {
+  background-color: hotpink;
+  width: 100%;
+}
+
+.liOlivier{
+  background-color: deepskyblue;
+  width: 100%;
+}
+
 #fondecran {
   /* Fixe l'image en haut à gauche de la page */
   position: fixed;

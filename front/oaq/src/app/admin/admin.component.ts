@@ -24,4 +24,8 @@ export class AdminComponent implements OnInit {
     questionNext() {
         this.socket.emit('broadcastQuestionNext');
     }
+
+    showResults() {
+      this.socket.emit('goToResults');
+    }
 }

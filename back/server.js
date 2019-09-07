@@ -20,7 +20,9 @@ io.on('connection', (socket) => {
 
     gestionEvenement(socket);
 
-
+    socket.on('goToResults', () => {
+        io.emit('showResults')
+    });
     //socket.emit('questions', questionsJson);
     //socket.on('broadcastToAll', (msg) => {console.log('Broadcast to all');io.emit('AllPlayers', msg)});
     //socket.on('gameStart', () => {io.emit('gameStart')});

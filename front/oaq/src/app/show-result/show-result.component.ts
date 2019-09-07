@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Joueurs } from '../player/player.model';
+import { Joueur } from '../player/player.model';
 import { Socket } from 'ngx-socket-io';
 import { CLIENT_EVENTS, SERVER_EVENTS } from '../constant';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-show-result',
@@ -11,16 +12,27 @@ import { CLIENT_EVENTS, SERVER_EVENTS } from '../constant';
 export class ShowResultComponent implements OnInit {
 
   displayedColumns: string[];
-  dataSource: Joueurs[];
+  joueurs: Joueur[];
+  totalOlivier: number=0;
+  totalAuore:number=0;
+  finDuJeux: boolean = false;
 
-  constructor(private readonly socket: Socket) { }
+  constructor(private readonly socket: Socket, private readonly  router: Router) { }
 
   ngOnInit() {
     this.displayedColumns = ['nom', 'score', 'position'];
 
-    this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (joueur: Joueurs[]) => {
+    this.socket.on(SERVER_EVENTS.NAVIGUE_VERS_DIAPO, () => {
+      this.router.navigateByUrl("/diapo");
+    });
 
-      const sortComparator = (a: Joueurs, b: Joueurs) => {
+    this.socket.emit(SERVER_EVENTS.END_GAMES, () => {
+      this.finDuJeux = true;
+    });
+
+    this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (joueur: Joueur[]) => {
+
+      const sortComparator = (a: Joueur, b: Joueur) => {
         if (a.score > b.score) {
           return -1
         } else if (a.score === b.score) {
@@ -29,20 +41,22 @@ export class ShowResultComponent implements OnInit {
           return 1
         }
       };
-        joueur.sort(sortComparator);
+      joueur.sort(sortComparator);
 
       const playersWithPosition = joueur.map((player, index) => {
         player.position = index + 1;
         return player;
       });
-      this.dataSource = playersWithPosition;
+      this.joueurs = playersWithPosition;
+
+      for(const j in this.joueurs){
+        if(this.joueurs[j].equipe === 'Aurore') {
+          this.totalAuore = this.totalAuore + this.joueurs[j].score;
+        }
+        if(this.joueurs[j].equipe === 'Olivier') {
+          this.totalOlivier = this.totalAuore + this.joueurs[j].score;
+        }
+      }
     });
-
-    this.socket.on(SERVER_EVENTS.NEW_PLAYER_SUCCESS, () => {
-
-    });
-
-
   }
-
 }

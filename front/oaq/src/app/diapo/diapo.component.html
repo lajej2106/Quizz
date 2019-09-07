@@ -33,11 +33,14 @@
         <img class="image" src="{{image}}">
       </div>
 
-      <div class="col-3 align-self-center text-center">
-        les plus rapides:
+      <div class="col-2 align-self-center text-center">
+        <h3>les plus rapides:</h3>
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let joueurRepondu of listeJoueursRepondu|slice:0:5; let i = index">
-            <b>{{joueurRepondu.nom}}</b>
+          <li class="list-group-item" *ngFor="let joueurRepondu of listeJoueursRepondu|slice:0:5; let i = index" [ngClass]="joueurRepondu.equipe === 'Aurore' ? 'liAurore' : 'liOlivier'">
+            <img *ngIf="i===0" class="logo text-left" src="assets/images/or.png">
+            <img *ngIf="i===1" class="logo text-left" src="assets/images/bronze.png">
+            <img *ngIf="i===2" class="logo text-left" src="assets/images/argent.png">
+            <b>&nbsp;&nbsp;&nbsp;{{joueurRepondu.nom}}</b>
           </li>
         </ul>
       </div>
@@ -46,21 +49,21 @@
     <div class="row justify-content-md-center align-items-center">
       <div class="col-4 align-self-center">
         <button
-          class="btn btn-danger btn-lg btn-block">{{question ? question.reponses[0].reponseLabel : 'Ceci est un texte d\'une longueur suffisante pour voir comment réagie le bouton dans le cas ou l\'on déside d\'ecrire un romain dans le bouton'}}</button>
+          class="btn btn-lg btn-block" [ngClass]="cssbtn1">{{question ? question.reponses[0].reponseLabel : 'Ceci est un texte d\'une longueur suffisante pour voir comment réagie le bouton dans le cas ou l\'on déside d\'ecrire un romain dans le bouton'}}</button>
       </div>
       <div class="col-4 align-self-center">
         <button
-          class="btn btn-primary btn-lg btn-block">{{question ? question.reponses[1].reponseLabel : '2/4'}}</button>
+          class="btn btn-lg btn-block" [ngClass]="cssbtn2">{{question ? question.reponses[1].reponseLabel : '2/4'}}</button>
       </div>
     </div>
     <div class="row justify-content-md-center align-items-center">
       <div class="col-4 align-self-center">
         <button
-          class="btn btn-warning btn-lg btn-block">{{question ? question.reponses[2].reponseLabel : '3/4'}}</button>
+          class="btn btn-lg btn-block" [ngClass]="cssbtn3">{{question ? question.reponses[2].reponseLabel : '3/4'}}</button>
       </div>
       <div class="col-4 align-self-center">
         <button
-          class="btn btn-success btn-lg btn-block">{{question ? question.reponses[3].reponseLabel : '4/4'}}</button>
+          class="btn btn-lg btn-block" [ngClass]="cssbtn4">{{question ? question.reponses[3].reponseLabel : '4/4'}}</button>
       </div>
     </div>
   </div>

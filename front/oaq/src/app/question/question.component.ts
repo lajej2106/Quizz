@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CLIENT_EVENTS, SERVER_EVENTS} from "../constant";
 import {Socket} from "ngx-socket-io";
-import {Joueurs, Question} from "../player/player.model";
+import {Joueur, Question} from "../player/player.model";
 import {$} from "protractor";
 import {MatDialog, MatDialogRef} from "@angular/material";
 import {ModalComponent} from "./modal/modal.component";
@@ -19,8 +19,8 @@ export class QuestionComponent implements OnInit {
   questionActive: boolean = false;
   compteARebour: number = null;
   displayedColumns: string[]
-  listeJoueursOlivier: Joueurs[];
-  listeJoueursAurore: Joueurs[];
+  listeJoueursOlivier: Joueur[];
+  listeJoueursAurore: Joueur[];
   reponse: any;
   cssbtn1: string;
   cssbtn2: string;
@@ -50,6 +50,10 @@ export class QuestionComponent implements OnInit {
       this.closeModal();
       this.question = questionServeur;
       this.questionActive = true;
+      this.cssbtn1 = null;
+      this.cssbtn2 = null;
+      this.cssbtn3 = null;
+      this.cssbtn4 = null;
     });
 
     console.log("compteur init ");
@@ -66,7 +70,7 @@ export class QuestionComponent implements OnInit {
   }
 
   getListeJoueurs() {
-    this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (joueurs: Joueurs[]) => {
+    this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (joueurs: Joueur[]) => {
       console.log('Joueurs : ' + JSON.stringify(joueurs));
       this.listeJoueursOlivier = [];
       this.listeJoueursAurore = [];

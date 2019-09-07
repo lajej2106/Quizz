@@ -13,10 +13,17 @@ let compteur =
 
 const envoyerQuestion = (socket, io) => {
     socket.on('broadcastQuestionNext', () => {
-        indexQuestion++;
-        console.log(`Question suivante index : ${indexQuestion.toString()}`);
-        io.emit('nextQuestions', questionsJson.questions[indexQuestion]);
-        compteARebour(socket, io);
+        io.emit('navigueVersDiapo');
+        if(indexQuestion >= questionsJson.questions.length) {
+            console.log('!!!!!!!!! Fin du JEU !!!!!!!!!!');
+            io.emit('showResults');
+            io.emit('endGames');
+        } else {
+            indexQuestion++;
+            console.log(`Question suivante index : ${indexQuestion.toString()}`);
+            io.emit('nextQuestions', questionsJson.questions[indexQuestion]);
+            compteARebour(socket, io);
+        }
     });
 };
 

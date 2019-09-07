@@ -1,4 +1,4 @@
-export interface Joueurs {
+export interface Joueur {
     nom: string;
     score: number;
     position: number;
