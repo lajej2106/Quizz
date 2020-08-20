@@ -2,12 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {CLIENT_EVENTS, SERVER_EVENTS} from "../constant";
 import {Socket} from "ngx-socket-io";
 import {Joueur, Question} from "../player/player.model";
-import {$} from "protractor";
-import {MatDialog, MatDialogRef} from "@angular/material";
 import {ModalComponent} from "./modal/modal.component";
-import {forEach} from "@angular/router/src/utils/collection";
-import {of} from "rxjs";
 import {Router} from "@angular/router";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-question',
@@ -18,7 +15,7 @@ export class QuestionComponent implements OnInit {
 
   questionActive: boolean = false;
   compteARebour: number = null;
-  displayedColumns: string[]
+  displayedColumns: string[];
   listeJoueursOlivier: Joueur[];
   listeJoueursAurore: Joueur[];
   reponse: any;

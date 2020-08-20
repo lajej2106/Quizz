@@ -13,6 +13,8 @@ export class AdminComponent implements OnInit {
   autoRefreshInterval: any;
   isAutoRefresh = false;
 
+
+
   constructor(private readonly playerService: PlayerService, private readonly socket: Socket) { }
 
   ngOnInit() {

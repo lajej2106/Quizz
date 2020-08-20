@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "oaq"
+  "defaultProject": "oaq",
+  "cli": {
+    "analytics": "afbcc56f-40a9-4cf7-8133-76544c5c9e52"
+  }
 }

@@ -1,4 +1,4 @@
-export const URL_SERVER = "192.168.8.100:1337";
+export const URL_SERVER = "localhost:1337";
 
 export interface IServerEvents {
   NEW_PLAYER_SUCCESS,
