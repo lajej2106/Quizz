@@ -2,7 +2,7 @@
   "name": "oaq",
   "version": "1.0.0",
   "scripts": {
-    "ng": "ng",
+    "ng:update": "ng update --all=true",
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
