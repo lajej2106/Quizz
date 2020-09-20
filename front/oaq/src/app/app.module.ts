@@ -23,6 +23,7 @@ import { QuestionComponent } from './question/question.component';
 import { DiapoComponent } from './diapo/diapo.component';
 import { ModalComponent } from './question/modal/modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { AutorisationComponent } from './autorisation/autorisation.component';
 
 const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: { autoConnect: false } };
 
@@ -35,7 +36,8 @@ const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: 
     ShowResultComponent,
     QuestionComponent,
     DiapoComponent,
-    ModalComponent
+    ModalComponent,
+    AutorisationComponent
   ],
   imports: [
     BrowserModule,

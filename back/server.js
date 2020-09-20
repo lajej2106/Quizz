@@ -13,19 +13,16 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 const joueurs = [];
 
-
-
-
 io.on('connection', (socket) => {
+    try {
+        gestionEvenement(socket);
 
-    gestionEvenement(socket);
-
-    socket.on('goToResults', () => {
-        io.emit('showResults');
-    });
-    //socket.emit('questions', questionsJson);
-    //socket.on('broadcastToAll', (msg) => {console.log('Broadcast to all');io.emit('AllPlayers', msg)});
-    //socket.on('gameStart', () => {io.emit('gameStart')});
+        socket.on('goToResults', () => {
+            io.emit('showResults');
+        });
+    } catch (e) {
+        console.log('Exception non traiter : ', e)
+    }
 });
 
 

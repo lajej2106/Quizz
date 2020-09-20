@@ -14,7 +14,8 @@ export class DiapoComponent implements OnInit {
   constructor(private readonly socket: Socket, private readonly router: Router) {
   }
 
-  letsGo: boolean = false;
+  letsGoFirst: boolean = false;
+  topResponse: boolean = false;
   question: Question;
   compteARebour: number;
   compteARebourNumsTen: string = '0';
@@ -32,19 +33,26 @@ export class DiapoComponent implements OnInit {
       this.router.navigateByUrl("/showResult");
     });
 
-    this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {
-      this.letsGo = true;
-      this.question = questionServeur;
-      this.image = 'assets/images/' + this.question.image;
+    this.socket.on(SERVER_EVENTS.GO_RESPONSE, () => {
       this.listeJoueursRepondu = [];
       this.cssbtn1 = 'btn-danger';
       this.cssbtn2 = 'btn-primary';
       this.cssbtn3 = 'btn-warning';
       this.cssbtn4 = 'btn-success';
+      this.topResponse = true;
+    })
+
+    this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {
+      this.letsGoFirst = true;
+      this.topResponse = false;
+      this.question = questionServeur;
+      this.image = 'assets/images/' + this.question.image;
     });
 
-    this.socket.on(SERVER_EVENTS.JOUEUR_REPONDU, (joueur: Joueur) => {
-      this.listeJoueursRepondu.push(joueur);
+    this.socket.on(SERVER_EVENTS.JOUEUR_REPONDU, (joueur: Joueur, bonneReponse: boolean) => {
+      if(bonneReponse) {
+        this.listeJoueursRepondu.push(joueur);
+      }
     });
 
     this.socket.on(SERVER_EVENTS.COMPTE_A_REBOUR, (compteur: number) => {

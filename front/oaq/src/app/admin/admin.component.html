@@ -1,13 +1,63 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <p>Démérage et question suivante</p>
-      <button class="btn btn-primary" (click)="questionNext()">Next</button>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div class="row">
+                <div class="col">
+                    <p>Page d'administration</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>Démérage et question suivante</p>
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" (click)="questionNext()">Next</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>Vers Resultats</p>
+                </div>
+                <div class="col">
+                    <button class="btn btn-warning" (click)="showResults()">Resultats</button>
+                </div>
+            </div>
+            <div class="row">
+                <p>Elle</p>
+                <div class="col">
+                    <div style="color: green;">{{listeJoueursBonneReponduMariee.length}}</div>
+                </div>
+                <div class="col">
+                    <div style="color: red;">{{listeJoueursMauvaiseReponduMariee.length}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <p>Lui</p>
+                <div class="col">
+                    <div style="color: green;">{{listeJoueursBonneReponduMari.length}}</div>
+                </div>
+                <div class="col">
+                    <div style="color: red;">{{listeJoueursMauvaiseReponduMari.length}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <p>Total</p>
+                <div class="col">
+                    <div style="color: green;">{{listeJoueursBonneReponduMari.length + listeJoueursBonneReponduMariee.length}}</div>
+                </div>
+                <div class="col">
+                    <div style="color: red;">{{listeJoueursMauvaiseReponduMari.length + listeJoueursMauvaiseReponduMariee.length}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <p>Total participation</p>
+                <div class="col">
+                    <div style="color: blue;">{{listeJoueursBonneReponduMariee.length + listeJoueursMauvaiseReponduMariee.length + listeJoueursBonneReponduMari.length + listeJoueursMauvaiseReponduMari.length}} / {{joueurs.length}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-10">
+            <app-show-result [activeRoute]="false"></app-show-result>
+        </div>
     </div>
-    <div class="col">
-      <p>Vers Resultats</p>
-      <button class="btn btn-warning" (click)="showResults()">Resultats</button>
-    </div>
-  </div>
-
 </div>

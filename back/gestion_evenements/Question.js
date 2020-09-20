@@ -1,5 +1,7 @@
 const questionsJson = require('../questions.json');
+const sauvegarde = require('./sauvegardeCsv.js');
 
+let topResponse = false;
 let indexQuestion = 0;
 let compteur =
 
@@ -13,16 +15,26 @@ let compteur =
 
 const envoyerQuestion = (socket, io) => {
     socket.on('broadcastQuestionNext', () => {
-        indexQuestion++;
-        if(indexQuestion >= questionsJson.questions.length) {
+        if(!topResponse || indexQuestion === 0) {
+            indexQuestion++;
+        }
+        if (indexQuestion >= questionsJson.questions.length) {
             console.log('!!!!!!!!! Fin du JEU !!!!!!!!!!');
             io.emit('showResults');
             io.emit('endGames');
         } else {
-            io.emit('navigueVersDiapo');
-            console.log(`Question suivante index : ${indexQuestion.toString()}`);
-            io.emit('nextQuestions', questionsJson.questions[indexQuestion]);
-            compteARebour(socket, io);
+            if (topResponse) {
+                io.emit('goResponse');
+                console.log(`Go pour repondre`);
+                compteARebour(socket, io);
+                topResponse = false;
+            } else {
+                io.emit('navigueVersDiapo');
+                console.log(`Question index : ${indexQuestion.toString()}`);
+                io.emit('nextQuestions', questionsJson.questions[indexQuestion]);
+                topResponse = true;
+                sauvegarde.ecrireNouveauScore(questionsJson.questions[indexQuestion]);
+            }
         }
     });
 };
@@ -30,26 +42,34 @@ const envoyerQuestion = (socket, io) => {
 const reponseQuestion = (socket, io, joueurs) => {
     socket.on('postReponseQuestion', (reponseQuestion) => {
         const nomJoueur = socket.handshake.query.nomJoueur;
-        console.log('Score : ' + nomJoueur);
         if (joueurs.map(joueur => joueur.nom).includes(nomJoueur)) {
             for (const i in joueurs) {
                 let joueur = joueurs[i];
                 if (joueur.nom === nomJoueur) {
+                    let bonneReponse = false;
                     const resultats = questionsJson.questions[indexQuestion].resultats;
+                    let scoreQuestion = 0;
                     for (const y in resultats) {
                         if (reponseQuestion === resultats[y].resultatLabel) {
                             if (compteur != 0) {
-                                joueur.score = joueur.score + 9 * compteur
+                                scoreQuestion = 9 * compteur;
                             } else {
-                                joueur.score = joueur.score + 5;
+                                scoreQuestion = 5;
                             }
-                            io.emit('joueurRepondu', joueur);
+                            joueur.score = joueur.score + scoreQuestion;
+                            bonneReponse = true;
                         }
                     }
+                    io.emit('joueurRepondu', joueur, bonneReponse);
+                    sauvegarde.enregistrerReponse(joueur, reponseQuestion, compteur, scoreQuestion);
                 }
             }
         } else {
-            socket.emit('PlayerIntrouvable', buildError('E003', 'Joueur introuvable'));
+            try {
+                socket.emit('PlayerIntrouvable', buildError('E003', 'Joueur introuvable'));
+            } catch (e) {
+                console.log('Exception : ', e);
+            }
         }
     });
 };
@@ -58,7 +78,6 @@ const compteARebour = (socket, io) => {
     compteur = 20;
     var x = setInterval(() => {
         if (compteur >= 0) {
-            console.log('compteur : ' + compteur.toString());
             io.emit('compteARebour', compteur);
             if (compteur != 0) {
                 compteur--;

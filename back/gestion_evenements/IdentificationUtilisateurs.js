@@ -1,3 +1,5 @@
+//import {Joueur} from './models';
+
 module.exports = {
     IdentificationUtilisateurs: function(app, socket, io, joueurs) {
         gestionConnexion(socket);
@@ -7,8 +9,6 @@ module.exports = {
         socket.on('getPlayers', (callback) => {
             callback(joueurs);
         });
-
-        console.log('liste des joueurs : ' + JSON.stringify(joueurs));
     }
 };
 
@@ -40,11 +40,7 @@ const connexionNouveauJoueur = (socket, io, joueurs) => {
             if (!joueurs.map(nomJoueur => nomJoueur.nom).includes(nomJoueur)) {
                 console.log(`Ajout de l'utilisateur ${nomJoueur} équipe ${equipeJoueur}`);
                 ajoutJoueur(socket, io, joueurs, nomJoueur, equipeJoueur)
-            } else {
-                socket.emit('newPlayerError', buildError('E002', 'Joueur déjà connu'));
             }
-        } else {
-            socket.emit('newPlayerError', buildError('E001', 'Mauvais paramètre'));
         }
     });
 };

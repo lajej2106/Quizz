@@ -1,8 +1,8 @@
-<div *ngIf="!letsGo">
-  <img src="assets/images/PremierePage.png" id="pageentree"/>
+<div *ngIf="!letsGoFirst">
+  <img src="../../assets/images/TristanEtDodie/PremierePage.png" id="pageentree"/>
 </div>
-<div *ngIf="letsGo">
-  <img src="assets/images/FondDePage.png" id="fondecran"/>
+<div *ngIf="letsGoFirst">
+  <img src="assets/images/TristanEtDodie/FondDePage.png" id="fondecran"/>
   <div class="container-fluid">
     <div class="row align-items-center">
       <div class="col align-self-center">
@@ -16,16 +16,19 @@
     </div>
     <div class="row ">
       <div class="col-3 align-self-center text-center">
-        <div id="countdown" class="countdownHolder">
-          <span class="countDiv2"></span>
-          <span class="countSeconds">
-          <span class="position">
-            <span class="digit static">{{compteARebourNumsTen}}</span>
-          </span>
-          <span class="position">
-            <span class="digit static">{{compteARebourNumsOne}}</span>
-          </span>
-        </span>
+
+        <div *ngIf="topResponse">
+          <div id="countdown" class="countdownHolder">
+            <span class="countDiv2"></span>
+            <span class="countSeconds">
+              <span class="position">
+                <span class="digit static">{{compteARebourNumsTen}}</span>
+              </span>
+              <span class="position">
+                <span class="digit static">{{compteARebourNumsOne}}</span>
+              </span>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -33,37 +36,47 @@
         <img class="image" src="{{image}}">
       </div>
 
+
       <div class="col-2 align-self-center text-center">
-        <h3>les plus rapides:</h3>
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let joueurRepondu of listeJoueursRepondu|slice:0:5; let i = index" [ngClass]="joueurRepondu.equipe === 'Aurore' ? 'liAurore' : 'liOlivier'">
-            <img *ngIf="i===0" class="logo text-left" src="assets/images/or.png">
-            <img *ngIf="i===1" class="logo text-left" src="assets/images/bronze.png">
-            <img *ngIf="i===2" class="logo text-left" src="assets/images/argent.png">
-            <b>&nbsp;&nbsp;&nbsp;{{joueurRepondu.nom}}</b>
-          </li>
-        </ul>
+        <div *ngIf="topResponse && listeJoueursRepondu.length > 0">
+          <h3>les plus rapides:</h3>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let joueurRepondu of listeJoueursRepondu|slice:0:5; let i = index"
+                [ngClass]="joueurRepondu.equipe === 'Aurore' ? 'liAurore' : 'liOlivier'">
+              <img *ngIf="i===0" class="logo text-left" src="assets/images/or.png">
+              <img *ngIf="i===1" class="logo text-left" src="assets/images/bronze.png">
+              <img *ngIf="i===2" class="logo text-left" src="assets/images/argent.png">
+              <b>&nbsp;&nbsp;&nbsp;{{joueurRepondu.nom}}</b>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="row justify-content-md-center align-items-center">
-      <div class="col-4 align-self-center">
-        <button
-          class="btn btn-lg btn-block" [ngClass]="cssbtn1">{{question ? question.reponses[0].reponseLabel : 'Ceci est un texte d\'une longueur suffisante pour voir comment réagie le bouton dans le cas ou l\'on déside d\'ecrire un romain dans le bouton'}}</button>
+    <div *ngIf="topResponse">
+      <div class="row justify-content-md-center align-items-center">
+        <div class="col-4 align-self-center">
+          <button
+            class="btn btn-lg btn-block"
+            [ngClass]="cssbtn1">{{question ? question.reponses[0].reponseLabel : 'Ceci est un texte d\'une longueur suffisante pour voir comment réagie le bouton dans le cas ou l\'on déside d\'ecrire un romain dans le bouton'}}</button>
+        </div>
+        <div class="col-4 align-self-center">
+          <button
+            class="btn btn-lg btn-block"
+            [ngClass]="cssbtn2">{{question ? question.reponses[1].reponseLabel : '2/4'}}</button>
+        </div>
       </div>
-      <div class="col-4 align-self-center">
-        <button
-          class="btn btn-lg btn-block" [ngClass]="cssbtn2">{{question ? question.reponses[1].reponseLabel : '2/4'}}</button>
-      </div>
-    </div>
-    <div class="row justify-content-md-center align-items-center">
-      <div class="col-4 align-self-center">
-        <button
-          class="btn btn-lg btn-block" [ngClass]="cssbtn3">{{question ? question.reponses[2].reponseLabel : '3/4'}}</button>
-      </div>
-      <div class="col-4 align-self-center">
-        <button
-          class="btn btn-lg btn-block" [ngClass]="cssbtn4">{{question ? question.reponses[3].reponseLabel : '4/4'}}</button>
+      <div class="row justify-content-md-center align-items-center">
+        <div class="col-4 align-self-center">
+          <button
+            class="btn btn-lg btn-block"
+            [ngClass]="cssbtn3">{{question ? question.reponses[2].reponseLabel : '3/4'}}</button>
+        </div>
+        <div class="col-4 align-self-center">
+          <button
+            class="btn btn-lg btn-block"
+            [ngClass]="cssbtn4">{{question ? question.reponses[3].reponseLabel : '4/4'}}</button>
+        </div>
       </div>
     </div>
   </div>

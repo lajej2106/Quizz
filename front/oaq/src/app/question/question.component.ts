@@ -13,6 +13,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 })
 export class QuestionComponent implements OnInit {
 
+  reponseVisible: boolean = true;
   questionActive: boolean = false;
   compteARebour: number = null;
   displayedColumns: string[];
@@ -23,6 +24,7 @@ export class QuestionComponent implements OnInit {
   cssbtn2: string;
   cssbtn3: string;
   cssbtn4: string;
+  private image: string;
 
   constructor(private readonly socket: Socket,
               private readonly router: Router,
@@ -45,12 +47,20 @@ export class QuestionComponent implements OnInit {
 
     this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {
       this.closeModal();
+      this.questionActive = false;
+      this.reponseVisible = false;
       this.question = questionServeur;
-      this.questionActive = true;
       this.cssbtn1 = null;
       this.cssbtn2 = null;
       this.cssbtn3 = null;
       this.cssbtn4 = null;
+
+      this.image = 'assets/images/' + this.question.image;
+    });
+
+    this.socket.on(SERVER_EVENTS.GO_RESPONSE, (questionServeur: Question) => {
+      this.questionActive = true;
+      this.reponseVisible = true;
     });
 
     console.log("compteur init ");

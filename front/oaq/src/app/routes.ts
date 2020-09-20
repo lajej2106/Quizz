@@ -4,13 +4,15 @@ import { AdminComponent } from "./admin/admin.component";
 import { ShowResultComponent } from "./show-result/show-result.component";
 import {QuestionComponent} from "./question/question.component";
 import {DiapoComponent} from "./diapo/diapo.component";
+import {AutorisationComponent} from "./autorisation/autorisation.component";
+import {AuthGuard} from "./autorisation/auth.guard";
 
 export const appRoutes: Routes = [
-    { path: 'authent', component: AuthentComponent },
-    { path: '', redirectTo: 'authent', pathMatch: 'full' },
-    { path: 'authent', redirectTo: 'authent', pathMatch: 'full' },
-    { path: 'showResult', component: ShowResultComponent },
-    { path: 'questions', component: QuestionComponent},
+    { path: 'authent', component: AuthentComponent, canActivate:[AuthGuard]},
+    { path: '', redirectTo: 'authent', pathMatch: 'full', canActivate:[AuthGuard]},
+    { path: 'authent', redirectTo: 'authent', pathMatch: 'full', canActivate:[AuthGuard]},
+    { path: 'showResult', component: ShowResultComponent},
+    { path: 'questions', component: QuestionComponent, canActivate:[AuthGuard]},
     { path: 'admin', component: AdminComponent },
     { path: 'diapo', component: DiapoComponent}
 ];

@@ -1,3 +1,23 @@
+.btn-danger{
+  background-color: olivedrab;
+  color: black;
+}
+
+.btn-primary{
+  background-color: #D5EFBB;
+  color: black;
+}
+
+.btn-warning{
+  background-color: lightseagreen;
+  color: black;
+}
+
+.btn-success{
+  background-color: cadetblue;
+  color: black;
+}
+
 .image {
   background-size: cover;
   width: 900px;

@@ -1,3 +1,17 @@
-<div *ngFor="let alert of this.alertsServices.alerts">
-  <alert [type]="alert.type" [dismissible]="alert.dismissible" [dismissOnTimeout]="alert.dismissTimeout"><span [innerHtml]="alert.message"></span></alert>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div *ngFor="let alert of this.alertsServices.alerts">
+                <div *ngIf="this.alert.type == 'danger'">
+                    <img src="../../assets/403forbiddenerror.jpg" class="img-responsive">
+                </div>
+
+                <alert [type]="alert.type" [dismissible]="alert.dismissible"
+                       [dismissOnTimeout]="alert.dismissTimeout"><span
+                        [innerHtml]="alert.message"></span></alert>
+            </div>
+        </div>
+    </div>
 </div>
+
+
