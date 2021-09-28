@@ -38,17 +38,17 @@ export class AdminComponent implements OnInit {
 
     this.socket.on(SERVER_EVENTS.JOUEUR_REPONDU, (joueur: Joueur, bonneReponse: boolean) => {
       if(bonneReponse) {
-        if(joueur.equipe === 'Aurore') {
+        if(joueur.equipe === 'Mariee') {
           this.listeJoueursBonneReponduMariee.push(joueur);
         }
-        if(joueur.equipe === 'Olivier') {
+        if(joueur.equipe === 'Mari') {
           this.listeJoueursBonneReponduMari.push(joueur);
         }
       } else {
-        if(joueur.equipe === 'Aurore') {
+        if(joueur.equipe === 'Mariee') {
           this.listeJoueursMauvaiseReponduMariee.push(joueur);
         }
-        if(joueur.equipe === 'Olivier') {
+        if(joueur.equipe === 'Mari') {
           this.listeJoueursMauvaiseReponduMari.push(joueur);
         }
       }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlertsService, ETypeAlert} from "../alerts/alerts.service";
 import {AutorisationService} from "./autorisation.service";
+import {environment} from "../../environments/environment.prod";
 
 @Component({
   selector: 'app-autorisation',
@@ -10,15 +11,17 @@ import {AutorisationService} from "./autorisation.service";
 export class AutorisationComponent implements OnInit {
 
   jscd: { screen: string; browser: string; browserVersion: string; browserMajorVersion: number; mobile: boolean; os: string; osVersion: any; cookies: boolean; flashVersion: string; };
+  private versionApp: string;
 
   constructor(
     private readonly alertsService: AlertsService,
-    private autorisation: AutorisationService) { }
+    private autorisation: AutorisationService) {
+  }
 
   ngOnInit(): void {
     this.recuperationDesVersionUtilisateur();
-
-    if(!this.clientEstCompatible()) {
+    this.versionApp = environment.version;
+    if (!this.clientEstCompatible()) {
       this.alertsService.addAlert(ETypeAlert[ETypeAlert.danger], 'non compatible', true, 5000, null);
       this.autorisation.autorisation = false;
     } else {
@@ -32,23 +35,23 @@ export class AutorisationComponent implements OnInit {
     let navigateurOk = false;
 
     if (this.jscd.os === "Windows") {
-      if(this.jscd.osVersion.split('.')) {
+      if (this.jscd.osVersion.split('.')) {
         let version = this.jscd.osVersion.split('.')
-        if(version[0] >= 10) {
+        if (version[0] >= 10) {
           osOk = true;
         }
       }
     } else if (this.jscd.os === "Android") {
-      if(this.jscd.osVersion.split('.')) {
+      if (this.jscd.osVersion.split('.')) {
         let version = this.jscd.osVersion.split('.')
-        if(version[0] >= 5) {
+        if (version[0] >= 5) {
           osOk = true;
         }
       }
     } else if (this.jscd.os === "iOS") {
-      if(this.jscd.osVersion.split('.')) {
+      if (this.jscd.osVersion.split('.')) {
         let version = this.jscd.osVersion.split('.')
-        if(version[0] >= 10) {
+        if (version[0] >= 10) {
           osOk = true;
         }
       }

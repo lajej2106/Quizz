@@ -49,30 +49,30 @@
                 <div *ngIf="!compteARebour && !question">
 
                     <div class="row align-items-center">
-                        <div class="col align-self-center cptOlivier">
-                            Team Olivier : {{listeJoueursOlivier ? listeJoueursOlivier.length : 0}}
+                        <div class="col align-self-center cptMari">
+                            Team Mari : {{listeJoueursMari ? listeJoueursMari.length : 0}}
                         </div>
                         <div class="col align-self-center">
                         </div>
-                        <div class="col align-self-center cptAurore">
-                            {{listeJoueursAurore ? listeJoueursAurore.length : 0}} : Team Aurore
+                        <div class="col align-self-center cptMariee">
+                            {{listeJoueursMariee ? listeJoueursMariee.length : 0}} : Team Mariee
                         </div>
                     </div>
 
                     <div class="row align-items-center">
                         <div class="col align-self-center margin0">
                             <ul class="list-group">
-                                <li class="list-group-item liOlivier"
-                                    *ngFor="let joueurOlivier of listeJoueursOlivier.slice().reverse(); let i = index">
-                                    <b>{{joueurOlivier.nom}}</b>
+                                <li class="list-group-item liMari"
+                                    *ngFor="let joueurMari of listeJoueursMari.slice().reverse(); let i = index">
+                                    <b>{{joueurMari.nom}}</b>
                                 </li>
                             </ul>
                         </div>
                         <div class="col align-self-center margin0">
                             <ul class="list-group">
-                                <li class="list-group-item liAurore"
-                                    *ngFor="let joueurAurore of listeJoueursAurore.slice().reverse(); let y = index">
-                                    <b>{{joueurAurore.nom}}</b>
+                                <li class="list-group-item liMariee"
+                                    *ngFor="let joueurMariee of listeJoueursMariee.slice().reverse(); let y = index">
+                                    <b>{{joueurMariee.nom}}</b>
                                 </li>
                             </ul>
                         </div>
@@ -124,10 +124,6 @@
                                 type="submit">{{question ? question.reponses[3].reponseLabel : '4/4'}}</button>
                     </div>
                 </div>
-            </div>
-
-            <div *ngIf="!reponseVisible">>
-                <img class="image" src="{{image}}">
             </div>
 
         </div>

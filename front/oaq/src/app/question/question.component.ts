@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {CLIENT_EVENTS, SERVER_EVENTS} from "../constant";
-import {Socket} from "ngx-socket-io";
-import {Joueur, Question} from "../player/player.model";
-import {ModalComponent} from "./modal/modal.component";
-import {Router} from "@angular/router";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {CLIENT_EVENTS, SERVER_EVENTS} from '../constant';
+import {Socket} from 'ngx-socket-io';
+import {Joueur, Question} from '../player/player.model';
+import {ModalComponent} from './modal/modal.component';
+import {Router} from '@angular/router';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-question',
@@ -13,12 +13,12 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 })
 export class QuestionComponent implements OnInit {
 
-  reponseVisible: boolean = true;
-  questionActive: boolean = false;
+  reponseVisible = true;
+  questionActive = false;
   compteARebour: number = null;
   displayedColumns: string[];
-  listeJoueursOlivier: Joueur[];
-  listeJoueursAurore: Joueur[];
+  listeJoueursMari: Joueur[];
+  listeJoueursMariee: Joueur[];
   reponse: any;
   cssbtn1: string;
   cssbtn2: string;
@@ -42,7 +42,7 @@ export class QuestionComponent implements OnInit {
     this.getListeJoueurs();
     this.socket.on(SERVER_EVENTS.BROADCAST_NOUVEAU_JOUEUR, () => {
       this.getListeJoueurs();
-      this.router.navigateByUrl("/questions");
+      this.router.navigateByUrl('/questions');
     });
 
     this.socket.on(SERVER_EVENTS.NEXT_QUESTIONS, (questionServeur: Question) => {
@@ -63,9 +63,9 @@ export class QuestionComponent implements OnInit {
       this.reponseVisible = true;
     });
 
-    console.log("compteur init ");
+    console.log('compteur init ');
     this.socket.on(SERVER_EVENTS.COMPTE_A_REBOUR, (compteur: number) => {
-      if (compteur == 0) {
+      if (compteur === 0) {
         this.bonneReponse();
         this.compteARebour = null;
         this.questionActive = false;
@@ -79,14 +79,14 @@ export class QuestionComponent implements OnInit {
   getListeJoueurs() {
     this.socket.emit(CLIENT_EVENTS.GET_PLAYERS, (joueurs: Joueur[]) => {
       console.log('Joueurs : ' + JSON.stringify(joueurs));
-      this.listeJoueursOlivier = [];
-      this.listeJoueursAurore = [];
+      this.listeJoueursMari = [];
+      this.listeJoueursMariee = [];
       for (const i in joueurs) {
-        if (joueurs[i].equipe === 'Olivier') {
-          this.listeJoueursOlivier.push(joueurs[i]);
+        if (joueurs[i].equipe === 'Mari') {
+          this.listeJoueursMari.push(joueurs[i]);
         }
-        if (joueurs[i].equipe === 'Aurore') {
-          this.listeJoueursAurore.push(joueurs[i]);
+        if (joueurs[i].equipe === 'Mariee') {
+          this.listeJoueursMariee.push(joueurs[i]);
         }
       }
     });
@@ -115,7 +115,7 @@ export class QuestionComponent implements OnInit {
   }
 
   private bonneReponse() {
-    for (let resultat of this.question.resultats) {
+    for (const resultat of this.question.resultats) {
       if (resultat.resultatLabel === this.question.reponses[0].reponseLabel) {
         if (resultat.resultatLabel === this.reponse) {
           this.cssbtn1 = 'btn-outline-success';

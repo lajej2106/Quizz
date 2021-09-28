@@ -22,7 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { QuestionComponent } from './question/question.component';
 import { DiapoComponent } from './diapo/diapo.component';
 import { ModalComponent } from './question/modal/modal.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule} from '@angular/material/dialog';
 import { AutorisationComponent } from './autorisation/autorisation.component';
 
 const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: { autoConnect: false } };
@@ -41,7 +41,7 @@ const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: 
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: false }),
+    RouterModule.forRoot(appRoutes, { enableTracing: false, useHash: true }),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

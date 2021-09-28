@@ -15,7 +15,7 @@ export class ShowResultComponent implements OnInit {
 
   displayedColumns: string[];
   joueurs: Joueur[];
-  totalOlivier: number=0;
+  totalMari: number=0;
   totalAuore:number=0;
   finDuJeux: boolean = false;
 
@@ -29,7 +29,7 @@ export class ShowResultComponent implements OnInit {
         this.router.navigateByUrl("/diapo");
       }
       this.totalAuore = 0;
-      this.totalOlivier = 0;
+      this.totalMari = 0;
       this.calculAffichage();
     });
 
@@ -62,11 +62,11 @@ export class ShowResultComponent implements OnInit {
       this.joueurs = playersWithPosition;
 
       for(const j in this.joueurs){
-        if(this.joueurs[j].equipe === 'Aurore') {
+        if(this.joueurs[j].equipe === 'Mariee') {
           this.totalAuore = this.totalAuore + this.joueurs[j].score;
         }
-        if(this.joueurs[j].equipe === 'Olivier') {
-          this.totalOlivier = this.totalOlivier + this.joueurs[j].score;
+        if(this.joueurs[j].equipe === 'Mari') {
+          this.totalMari = this.totalMari + this.joueurs[j].score;
         }
       }
     });

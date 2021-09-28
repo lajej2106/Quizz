@@ -36,21 +36,21 @@
     margin:0 auto;
 }
 
-.liAurore {
+.liMariee {
   background-color: hotpink;
   margin: 0 auto;
   width: 100%;
   text-align: center;
 }
 
-.liOlivier{
+.liMari{
   background-color: deepskyblue;
   margin:0 auto;
   width: 100%;
   text-align: center;
 }
 
-.cptOlivier {
+.cptMari {
   -moz-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(8deg, 0deg);
   -webkit-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(8deg, 0deg);
   -o-transform: scale(1) rotate(0deg) translate(0px, 0px) skew(8deg, 0deg);
@@ -59,7 +59,7 @@
   text-align: left;
 }
 
-.cptAurore {
+.cptMariee {
   font-style: italic;
   text-align: right;
 }

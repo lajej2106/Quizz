@@ -20,8 +20,8 @@
 
 .image {
   background-size: cover;
-  width: 900px;
-  height: 600px;
+  max-width: 900px;
+  max-height: 600px;
   border-radius:2em;
 }
 
@@ -31,12 +31,12 @@
   height: 25px;
 }
 
-.liAurore {
+.liMariee {
   background-color: hotpink;
   width: 100%;
 }
 
-.liOlivier{
+.liMari{
   background-color: deepskyblue;
   width: 100%;
 }
