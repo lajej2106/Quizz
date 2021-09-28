@@ -25,7 +25,7 @@ import { ModalComponent } from './question/modal/modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AutorisationComponent } from './autorisation/autorisation.component';
 
-const configSocketIO: SocketIoConfig = { url: 'http://localhost:1337', options: { autoConnect: false } };
+const configSocketIO: SocketIoConfig = { url: '192.168.31.17:1337', options: { autoConnect: false } };
 
 @NgModule({
   declarations: [

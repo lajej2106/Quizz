@@ -27,8 +27,8 @@ io.on('connection', (socket) => {
 
 
 const gestionEvenement = (socket) => {
-    identificationUtilisateurs: new IU.IdentificationUtilisateurs(app, socket, io, joueurs);
-    question: new Q.Question(app, socket, io, joueurs);
+    new IU.IdentificationUtilisateurs(app, socket, io, joueurs);
+    new Q.Question(app, socket, io, joueurs);
 };
 
 

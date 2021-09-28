@@ -1,5 +1,3 @@
-//import {Joueur} from './models';
-
 module.exports = {
     IdentificationUtilisateurs: function(app, socket, io, joueurs) {
         gestionConnexion(socket);
