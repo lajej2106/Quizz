@@ -58,7 +58,7 @@ const recuperationConnexionJoueur = (socket, io, joueurs) => {
 };
 
 const ajoutJoueur = (socket, io, joueurs, nomJoueur, equipe) => {
-    const nouveauJoueur = {nom: nomJoueur, score: 0, equipe: equipe};
+    const nouveauJoueur = {nom: nomJoueur, score: 0, equipe: equipe, position: 0};
     joueurs.push(nouveauJoueur);
     socket.handshake.query.nomJoueur = nomJoueur;
     socket.handshake.query.equipe = equipe;

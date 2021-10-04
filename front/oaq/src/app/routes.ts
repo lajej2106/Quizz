@@ -4,7 +4,6 @@ import { AdminComponent } from "./admin/admin.component";
 import { ShowResultComponent } from "./show-result/show-result.component";
 import {QuestionComponent} from "./question/question.component";
 import {DiapoComponent} from "./diapo/diapo.component";
-import {AutorisationComponent} from "./autorisation/autorisation.component";
 import {AuthGuard} from "./autorisation/auth.guard";
 
 export const appRoutes: Routes = [

@@ -23,19 +23,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(true) {
-
-      const nomJoueur = sessionStorage.getItem('nomJoueur');
-      const equipe = sessionStorage.getItem('equipe');
-      if (nomJoueur != null) {
-        this.playerService.nomJoueur = nomJoueur;
-        this.playerService.equipe = equipe;
-        this.socket.ioSocket.io.opts.query = {nomJoueur: nomJoueur, equipe: equipe};
-      }
-      this.socket.connect();
-    };
-
+    const nomJoueur = sessionStorage.getItem('nomJoueur');
+    const equipe = sessionStorage.getItem('equipe');
+    if (nomJoueur != null) {
+      this.playerService.nomJoueur = nomJoueur;
+      this.playerService.equipe = equipe;
+      this.socket.ioSocket.io.opts.query = {nomJoueur: nomJoueur, equipe: equipe};
+    }
+    this.socket.connect();
   }
-
-
 }

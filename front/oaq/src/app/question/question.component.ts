@@ -81,12 +81,12 @@ export class QuestionComponent implements OnInit {
       console.log('Joueurs : ' + JSON.stringify(joueurs));
       this.listeJoueursMari = [];
       this.listeJoueursMariee = [];
-      for (const i in joueurs) {
-        if (joueurs[i].equipe === 'Mari') {
-          this.listeJoueursMari.push(joueurs[i]);
+      for (const joueur of joueurs) {
+        if (joueur.equipe === 'Mari') {
+          this.listeJoueursMari.push(joueur);
         }
-        if (joueurs[i].equipe === 'Mariee') {
-          this.listeJoueursMariee.push(joueurs[i]);
+        if (joueur.equipe === 'Mariee') {
+          this.listeJoueursMariee.push(joueur);
         }
       }
     });

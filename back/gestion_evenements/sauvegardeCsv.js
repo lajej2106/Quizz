@@ -21,7 +21,7 @@ function ecrireNouveauScore(question) {
 
     let titre = question.titre;
     ecritureScore = createCsvWriter({
-        path: 'D:\\serveur\\' + titre + '.csv',
+        path: 'C:\\serveurReponseMariage\\' + titre + '.csv',
         header: [
             {id: 'nom', title: 'Nom'},
             {id: 'equipe', title: 'Equipe'},

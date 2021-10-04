@@ -75,7 +75,7 @@ const reponseQuestion = (socket, io, joueurs) => {
 };
 
 const compteARebour = (socket, io) => {
-    compteur = 20;
+    compteur = 1;
     var x = setInterval(() => {
         if (compteur >= 0) {
             io.emit('compteARebour', compteur);

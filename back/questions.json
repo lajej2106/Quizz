@@ -156,7 +156,7 @@
   {
     "titre": "Les folles années",
     "questionLabel": "A qui appartiens réellement ce string ?",
-    "image": "TristanEtDodie/Question_12.png",
+    "image": "TristanEtDodie/Question_12.jpg",
     "reponses": [
       {"reponseLabel": "Eric, oui oui, beau papa"},
       {"reponseLabel": "Auré, toujours le bon accesoir pour son pote"},
@@ -170,7 +170,7 @@
   {
     "titre": "Cromagnon",
     "questionLabel": "Et Dodie, elle fait quoi la ?",
-    "image": "TristanEtDodie/Question_13.png",
+    "image": "TristanEtDodie/Question_13.jpg",
     "reponses": [
       {"reponseLabel": "Elle chasse Tristan"},
       {"reponseLabel": "Elle tue des fourmis"},
@@ -184,7 +184,7 @@
   {
     "titre": "A l'autre bout du monde bébé",
     "questionLabel": "Sachant qu'ils sont déjà allé a Londre - Madrid et Paris. Combien de fois se sont t'il envoyer en l'air ensemble ?",
-    "image": "TristanEtDodie/Question_14.png",
+    "image": "TristanEtDodie/Question_14.jpg",
     "reponses": [
       {"reponseLabel": "4 fois | ... - Martinique"},
       {"reponseLabel": "5 fois | ... - Martinique - Sainte Lucie"},
@@ -192,7 +192,7 @@
       {"reponseLabel": "7 fois | ... - Martinique - Sainte Lucie - Miami - New York"}
     ],
     "resultats": [
-      {"resultatLabel": "7 fois | Londres - Madrid - Paris - Martinique - Sainte Lucie - Miami - New York"}
+      {"resultatLabel": "7 fois | ... - Martinique - Sainte Lucie - Miami - New York"}
     ]
   },
   {
@@ -212,7 +212,7 @@
   {
     "titre": "Festoche",
     "questionLabel": "Quel est leurs meilleurs festival de tous les temps, attention, il y a un piege",
-    "image": "TristanEtDodie/Question_16.png",
+    "image": "TristanEtDodie/Question_16.jpg",
     "reponses": [
       {"reponseLabel": "La Fete de la musique 2012"},
       {"reponseLabel": "Festival Marsatac 2009"},
@@ -254,7 +254,7 @@
   {
     "titre": "Tergoule c'est sacré !",
     "questionLabel": "Mais qu'ell est le jour de Tergoule?",
-    "image": "TristanEtDodie/Question_19.png",
+    "image": "TristanEtDodie/Question_19.jpg",
     "reponses": [
       {"reponseLabel": "quand on veut, c'est ilimité"},
       {"reponseLabel": "Le dernier weekend d'avril"},

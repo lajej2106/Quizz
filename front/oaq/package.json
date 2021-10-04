@@ -1,6 +1,6 @@
 {
   "name": "oaq",
-  "version": "1.0.17",
+  "version": "1.0.25",
   "scripts": {
     "ng": "ng update ngx-socket-io",
     "start": "ng serve --proxy-config proxy.conf.json",

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Joueur } from '../player/player.model';
-import { Socket } from 'ngx-socket-io';
-import { CLIENT_EVENTS, SERVER_EVENTS } from '../constant';
+import {Joueur} from '../player/player.model';
+import {Socket} from 'ngx-socket-io';
+import {CLIENT_EVENTS, SERVER_EVENTS} from '../constant';
 import {Router} from "@angular/router";
 
 @Component({
@@ -11,24 +11,25 @@ import {Router} from "@angular/router";
 })
 export class ShowResultComponent implements OnInit {
 
-  @Input() activeRoute: boolean = true;
+  @Input() activeRoute = true;
 
   displayedColumns: string[];
   joueurs: Joueur[];
-  totalMari: number=0;
-  totalAuore:number=0;
-  finDuJeux: boolean = false;
+  totalMari = 0;
+  totalMariee = 0;
+  finDuJeux = false;
 
-  constructor(private readonly socket: Socket, private readonly  router: Router) { }
+  constructor(private readonly socket: Socket, private readonly router: Router) {
+  }
 
   ngOnInit() {
     this.displayedColumns = ['nom', 'score', 'position'];
 
     this.socket.on(SERVER_EVENTS.NAVIGUE_VERS_DIAPO, () => {
-      if(this.activeRoute) {
-        this.router.navigateByUrl("/diapo");
+      if (this.activeRoute) {
+        this.router.navigateByUrl('/diapo');
       }
-      this.totalAuore = 0;
+      this.totalMariee = 0;
       this.totalMari = 0;
       this.calculAffichage();
     });
@@ -46,27 +47,26 @@ export class ShowResultComponent implements OnInit {
 
       const sortComparator = (a: Joueur, b: Joueur) => {
         if (a.score > b.score) {
-          return -1
+          return -1;
         } else if (a.score === b.score) {
-          return 0
+          return 0;
         } else {
-          return 1
+          return 1;
         }
       };
       joueur.sort(sortComparator);
 
-      const playersWithPosition = joueur.map((player, index) => {
+      this.joueurs = joueur.map((player, index) => {
         player.position = index + 1;
         return player;
       });
-      this.joueurs = playersWithPosition;
 
-      for(const j in this.joueurs){
-        if(this.joueurs[j].equipe === 'Mariee') {
-          this.totalAuore = this.totalAuore + this.joueurs[j].score;
+      for (const joueurCourant of this.joueurs) {
+        if (joueurCourant.equipe === 'Mariee') {
+          this.totalMariee = this.totalMariee + joueurCourant.score;
         }
-        if(this.joueurs[j].equipe === 'Mari') {
-          this.totalMari = this.totalMari + this.joueurs[j].score;
+        if (joueurCourant.equipe === 'Mari') {
+          this.totalMari = this.totalMari + joueurCourant.score;
         }
       }
     });
